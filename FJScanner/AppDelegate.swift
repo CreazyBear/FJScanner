@@ -12,10 +12,30 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var tabBarVC: UITabBarController?
+    var tabOneNav: UINavigationController?
+    var tabTwoNav: UINavigationController?
+    
+    var rootOneVC: FJScannerViewController?
+    var rootTwoVC: FJCollectorViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        
+        self.rootOneVC = FJScannerViewController()
+        self.rootTwoVC = FJCollectorViewController()
+        
+        self.tabBarVC = UITabBarController.init()
+        self.tabOneNav = UINavigationController.init(rootViewController: self.rootOneVC!)
+        self.tabTwoNav = UINavigationController.init(rootViewController: self.rootTwoVC!)
+        
+        self.tabBarVC?.setViewControllers([self.tabOneNav!,self.tabTwoNav!], animated: true)
+        self.tabOneNav?.tabBarItem.title = "视界"
+        self.tabTwoNav?.tabBarItem.title = "我的"
+        
+        self.window?.rootViewController = self.tabBarVC;
+        self.window?.makeKeyAndVisible()
         return true
     }
 

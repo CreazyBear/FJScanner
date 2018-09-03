@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AE93213D8A5F0009540D /* AppDelegate.swift */; };
-		A5B1AE96213D8A5F0009540D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AE95213D8A5F0009540D /* ViewController.swift */; };
-		A5B1AE99213D8A5F0009540D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B1AE97213D8A5F0009540D /* Main.storyboard */; };
 		A5B1AE9B213D8A610009540D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B1AE9A213D8A610009540D /* Assets.xcassets */; };
 		A5B1AE9E213D8A610009540D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B1AE9C213D8A610009540D /* LaunchScreen.storyboard */; };
 		A5B1AEA9213D8A610009540D /* FJScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEA8213D8A610009540D /* FJScannerTests.swift */; };
 		A5B1AEB4213D8A610009540D /* FJScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEB3213D8A610009540D /* FJScannerUITests.swift */; };
+		A5B1AEC4213D8C120009540D /* FJRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC3213D8C120009540D /* FJRootViewController.swift */; };
+		A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */; };
+		A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +37,6 @@
 /* Begin PBXFileReference section */
 		A5B1AE90213D8A5F0009540D /* FJScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FJScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B1AE93213D8A5F0009540D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5B1AE95213D8A5F0009540D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A5B1AE98213D8A5F0009540D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5B1AE9A213D8A610009540D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5B1AE9D213D8A610009540D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5B1AE9F213D8A610009540D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +46,9 @@
 		A5B1AEAF213D8A610009540D /* FJScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FJScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B1AEB3213D8A610009540D /* FJScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJScannerUITests.swift; sourceTree = "<group>"; };
 		A5B1AEB5213D8A610009540D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5B1AEC3213D8C120009540D /* FJRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJRootViewController.swift; sourceTree = "<group>"; };
+		A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJScannerViewController.swift; sourceTree = "<group>"; };
+		A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJCollectorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A509A06F213D951F000E7E52 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A5B1AEC3213D8C120009540D /* FJRootViewController.swift */,
+				A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */,
+				A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		A5B1AE87213D8A5F0009540D = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +109,8 @@
 		A5B1AE92213D8A5F0009540D /* FJScanner */ = {
 			isa = PBXGroup;
 			children = (
+				A509A06F213D951F000E7E52 /* ViewController */,
 				A5B1AE93213D8A5F0009540D /* AppDelegate.swift */,
-				A5B1AE95213D8A5F0009540D /* ViewController.swift */,
-				A5B1AE97213D8A5F0009540D /* Main.storyboard */,
 				A5B1AE9A213D8A610009540D /* Assets.xcassets */,
 				A5B1AE9C213D8A610009540D /* LaunchScreen.storyboard */,
 				A5B1AE9F213D8A610009540D /* Info.plist */,
@@ -231,7 +242,6 @@
 			files = (
 				A5B1AE9E213D8A610009540D /* LaunchScreen.storyboard in Resources */,
 				A5B1AE9B213D8A610009540D /* Assets.xcassets in Resources */,
-				A5B1AE99213D8A5F0009540D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B1AE96213D8A5F0009540D /* ViewController.swift in Sources */,
+				A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */,
+				A5B1AEC4213D8C120009540D /* FJRootViewController.swift in Sources */,
 				A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */,
+				A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,14 +305,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A5B1AE97213D8A5F0009540D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A5B1AE98213D8A5F0009540D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A5B1AE9C213D8A610009540D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,7 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -417,7 +421,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -433,6 +437,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,6 +456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScanner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
