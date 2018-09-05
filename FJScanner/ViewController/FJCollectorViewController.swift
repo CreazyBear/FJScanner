@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FJCollectorViewController: FJRootViewController {
 
@@ -18,6 +19,28 @@ class FJCollectorViewController: FJRootViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.title = self.navigationController!.tabBarItem.title
+        
+        let baiDuQRMessage = FJQRMessage()
+        baiDuQRMessage.name = "百度"
+        baiDuQRMessage.message = "https://www.baidu.com"
+        baiDuQRMessage.tag = "search"
+        
+        // Get the default Realm
+        let realm = try! Realm()
+        // Persist your data easily
+        try! realm.write {
+            realm.add(baiDuQRMessage)
+        }
+        
+        DispatchQueue.init(label: "background").async {
+            autoreleasepool {
+                let realm = try! Realm()
+                let result = realm.objects(FJQRMessage.self).filter("tag <> ''").first
+                print(result?.message ?? "No message")
+
+            }
+        }
+
     }
 
 }

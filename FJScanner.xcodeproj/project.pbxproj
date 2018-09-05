@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A54B0359213EE5C6003EC412 /* FJQRMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54B0358213EE5C6003EC412 /* FJQRMessage.swift */; };
 		A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AE93213D8A5F0009540D /* AppDelegate.swift */; };
 		A5B1AE9B213D8A610009540D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B1AE9A213D8A610009540D /* Assets.xcassets */; };
 		A5B1AE9E213D8A610009540D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B1AE9C213D8A610009540D /* LaunchScreen.storyboard */; };
@@ -15,6 +16,9 @@
 		A5B1AEC4213D8C120009540D /* FJRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC3213D8C120009540D /* FJRootViewController.swift */; };
 		A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */; };
 		A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */; };
+		DE8D06FF2994AB4C58923C60 /* Pods_FJScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */; };
+		F287C67B46155E5DBACE13BB /* Pods_FJScannerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3507C265C3FE5281726E40D /* Pods_FJScannerTests.framework */; };
+		F989BF630CE53F0AB3208170 /* Pods_FJScannerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A825A6A805CF1FFD5DF8DB66 /* Pods_FJScannerUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1726049D4B2F9D476AB9203D /* Pods-FJScannerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScannerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScannerTests/Pods-FJScannerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2FE6A31DFB57598B6DD178FA /* Pods-FJScannerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScannerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FJScannerUITests/Pods-FJScannerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		41506A99EC819784BA76CA7B /* Pods-FJScannerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScannerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FJScannerTests/Pods-FJScannerTests.release.xcconfig"; sourceTree = "<group>"; };
+		68132069F1F7C1E0A0967105 /* Pods-FJScannerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScannerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScannerUITests/Pods-FJScannerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.debug.xcconfig"; sourceTree = "<group>"; };
+		8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.release.xcconfig"; sourceTree = "<group>"; };
+		A54B0358213EE5C6003EC412 /* FJQRMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJQRMessage.swift; sourceTree = "<group>"; };
 		A5B1AE90213D8A5F0009540D /* FJScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FJScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B1AE93213D8A5F0009540D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B1AE9A213D8A610009540D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +60,9 @@
 		A5B1AEC3213D8C120009540D /* FJRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJRootViewController.swift; sourceTree = "<group>"; };
 		A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJScannerViewController.swift; sourceTree = "<group>"; };
 		A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJCollectorViewController.swift; sourceTree = "<group>"; };
+		A825A6A805CF1FFD5DF8DB66 /* Pods_FJScannerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScannerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3507C265C3FE5281726E40D /* Pods_FJScannerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScannerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE8D06FF2994AB4C58923C60 /* Pods_FJScanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F287C67B46155E5DBACE13BB /* Pods_FJScannerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +86,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F989BF630CE53F0AB3208170 /* Pods_FJScannerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B4F2892FA6A433EF1B967B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */,
+				E3507C265C3FE5281726E40D /* Pods_FJScannerTests.framework */,
+				A825A6A805CF1FFD5DF8DB66 /* Pods_FJScannerUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A509A06F213D951F000E7E52 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +113,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		A509A070213D9B15000E7E52 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A54B0358213EE5C6003EC412 /* FJQRMessage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A5B1AE87213D8A5F0009540D = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +128,8 @@
 				A5B1AEA7213D8A610009540D /* FJScannerTests */,
 				A5B1AEB2213D8A610009540D /* FJScannerUITests */,
 				A5B1AE91213D8A5F0009540D /* Products */,
+				B67F5FA08DA5347B0043C9CD /* Pods */,
+				3B4F2892FA6A433EF1B967B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +146,7 @@
 		A5B1AE92213D8A5F0009540D /* FJScanner */ = {
 			isa = PBXGroup;
 			children = (
+				A509A070213D9B15000E7E52 /* Model */,
 				A509A06F213D951F000E7E52 /* ViewController */,
 				A5B1AE93213D8A5F0009540D /* AppDelegate.swift */,
 				A5B1AE9A213D8A610009540D /* Assets.xcassets */,
@@ -136,6 +174,19 @@
 			path = FJScannerUITests;
 			sourceTree = "<group>";
 		};
+		B67F5FA08DA5347B0043C9CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */,
+				8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */,
+				1726049D4B2F9D476AB9203D /* Pods-FJScannerTests.debug.xcconfig */,
+				41506A99EC819784BA76CA7B /* Pods-FJScannerTests.release.xcconfig */,
+				68132069F1F7C1E0A0967105 /* Pods-FJScannerUITests.debug.xcconfig */,
+				2FE6A31DFB57598B6DD178FA /* Pods-FJScannerUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5B1AEB8213D8A610009540D /* Build configuration list for PBXNativeTarget "FJScanner" */;
 			buildPhases = (
+				4363ABF11FB817A623A90BB2 /* [CP] Check Pods Manifest.lock */,
 				A5B1AE8C213D8A5F0009540D /* Sources */,
 				A5B1AE8D213D8A5F0009540D /* Frameworks */,
 				A5B1AE8E213D8A5F0009540D /* Resources */,
+				60F2BC948B253D756D262F7B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +213,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5B1AEBB213D8A610009540D /* Build configuration list for PBXNativeTarget "FJScannerTests" */;
 			buildPhases = (
+				62BDAF5E96506957F4E874A8 /* [CP] Check Pods Manifest.lock */,
 				A5B1AEA0213D8A610009540D /* Sources */,
 				A5B1AEA1213D8A610009540D /* Frameworks */,
 				A5B1AEA2213D8A610009540D /* Resources */,
@@ -178,6 +232,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5B1AEBE213D8A610009540D /* Build configuration list for PBXNativeTarget "FJScannerUITests" */;
 			buildPhases = (
+				A1BAEE928E99088E89327348 /* [CP] Check Pods Manifest.lock */,
 				A5B1AEAB213D8A610009540D /* Sources */,
 				A5B1AEAC213D8A610009540D /* Frameworks */,
 				A5B1AEAD213D8A610009540D /* Resources */,
@@ -261,12 +316,90 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4363ABF11FB817A623A90BB2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FJScanner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60F2BC948B253D756D262F7B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		62BDAF5E96506957F4E874A8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FJScannerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1BAEE928E99088E89327348 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FJScannerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A5B1AE8C213D8A5F0009540D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */,
+				A54B0359213EE5C6003EC412 /* FJQRMessage.swift in Sources */,
 				A5B1AEC4213D8C120009540D /* FJRootViewController.swift in Sources */,
 				A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */,
 				A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */,
@@ -432,6 +565,7 @@
 		};
 		A5B1AEB9213D8A610009540D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -451,6 +585,7 @@
 		};
 		A5B1AEBA213D8A610009540D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -470,6 +605,7 @@
 		};
 		A5B1AEBC213D8A610009540D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1726049D4B2F9D476AB9203D /* Pods-FJScannerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -491,6 +627,7 @@
 		};
 		A5B1AEBD213D8A610009540D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41506A99EC819784BA76CA7B /* Pods-FJScannerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -512,6 +649,7 @@
 		};
 		A5B1AEBF213D8A610009540D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68132069F1F7C1E0A0967105 /* Pods-FJScannerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -532,6 +670,7 @@
 		};
 		A5B1AEC0213D8A610009540D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FE6A31DFB57598B6DD178FA /* Pods-FJScannerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
