@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.tabTwoNav = UINavigationController.init(rootViewController: self.rootTwoVC!)
         
         self.tabBarVC?.setViewControllers([self.tabOneNav!,self.tabTwoNav!], animated: true)
-        self.tabOneNav?.tabBarItem.title = "视界"
+        self.tabOneNav?.tabBarItem.title = "扫码"
         self.tabOneNav?.tabBarItem.image = UIImage.init(named: "camera")
-        self.tabTwoNav?.tabBarItem.title = "我的"
+        self.tabTwoNav?.tabBarItem.title = "收藏"
         self.tabTwoNav?.tabBarItem.image = UIImage.init(named: "mine")
         
         self.window?.rootViewController = self.tabBarVC;

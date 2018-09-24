@@ -10,10 +10,36 @@ import UIKit
 import AVFoundation
 import Photos
 
+
 class FJScannerViewController: FJRootViewController {
     
     var captureSession : AVCaptureSession?
     var videoPreviewLayer : AVCaptureVideoPreviewLayer?
+    var dest:FJRootViewController? = nil
+    
+    var scanSwitch : Bool {
+        willSet {
+            if newValue {
+                self.startSession()
+            }
+            else {
+                self.stopSession()
+            }
+        }
+    }
+    
+    init() {
+        self.scanSwitch = false
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +48,10 @@ class FJScannerViewController: FJRootViewController {
         let center = NotificationCenter.default
         let mainQueue = OperationQueue.main
         center.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: mainQueue) { (note) in
-            self.startSession()
+            self.scanSwitch = true
         }
         center.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: mainQueue) { (note) in
-            self.stopSession()
+            self.scanSwitch = false
         }
     }
     
@@ -33,17 +59,16 @@ class FJScannerViewController: FJRootViewController {
         super.viewDidAppear(animated)
         self.title = self.navigationController!.tabBarItem.title
         
-        self.setupCaptureDeviceAndSession()
-        self.startSession()
+        let status:AVAuthorizationStatus=AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        if status==AVAuthorizationStatus.authorized {//获得权限
+            self.setupCaptureDeviceAndSession()
+            self.scanSwitch = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.stopSession()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        self.scanSwitch = false
     }
     
     //MARK: - private
@@ -118,16 +143,19 @@ class FJScannerViewController: FJRootViewController {
                 break
             case .restricted:
                 //此应用程序没有被授权访问的照片数据
-                print("此应用程序没有被授权访问的照片数据")
+                self.view.makeToast("此应用程序没有被授权访问的照片数据")
                 break
             case .denied:
                 //用户已经明确否认了这一照片数据的应用程序访问
                 self.gotoSetting()
                 break
             case .authorized:
-                break//已经有权限
+                //已经有权限，开始扫描
+                if !self.scanSwitch {
+                    self.scanSwitch = true
+                }
+                break
             }
-            
         })
         
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (ist) in
@@ -165,6 +193,44 @@ class FJScannerViewController: FJRootViewController {
         alertController.addAction(sure)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    
+    func makeAlert(_ msg:String) {
+        let alertController = UIAlertController(title: msg, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let openAction = UIAlertAction(title: "打开", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
+            guard let url = URL.init(string: msg) else {
+                self.view.makeToast("打不开链接")
+                self.scanSwitch = true
+                return;
+            }
+            
+            UIApplication.shared.open(url, options: [UIApplicationOpenURLOptionUniversalLinksOnly:NSNumber.init(value: true)], completionHandler: { (success) in
+                if !success {
+                    self.view.makeToast("打不开链接")
+                    self.scanSwitch = true
+                }
+            })
+        })
+        
+        alertController.addAction(openAction)
+        
+        let copyAction = UIAlertAction(title: "复制", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = msg
+            self.scanSwitch = true
+        })
+        alertController.addAction(copyAction)
+
+        let collectAction = UIAlertAction(title: "收藏", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
+            self.scanSwitch = true
+        })
+        alertController.addAction(collectAction)
+
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 extension FJScannerViewController:AVCaptureMetadataOutputObjectsDelegate {
@@ -182,12 +248,12 @@ extension FJScannerViewController:AVCaptureMetadataOutputObjectsDelegate {
         
         if metadataObj.type == .qr {
             // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
-            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj) as! AVMetadataMachineReadableCodeObject
-            if metadataObj.stringValue != nil {
-                print("The result is :\(String(describing: metadataObj.stringValue))")
+            //let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj) as! AVMetadataMachineReadableCodeObject
+            if metadataObj.stringValue != nil && self.scanSwitch {
+                self.scanSwitch = false
+                self.makeAlert(metadataObj.stringValue!)
             }
         }
-
-        
     }
 }
+
