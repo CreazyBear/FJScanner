@@ -32,7 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.tabBarVC?.setViewControllers([self.tabOneNav!,self.tabTwoNav!], animated: true)
         self.tabOneNav?.tabBarItem.title = "视界"
+        self.tabOneNav?.tabBarItem.image = UIImage.init(named: "camera")
         self.tabTwoNav?.tabBarItem.title = "我的"
+        self.tabTwoNav?.tabBarItem.image = UIImage.init(named: "mine")
         
         self.window?.rootViewController = self.tabBarVC;
         self.window?.makeKeyAndVisible()

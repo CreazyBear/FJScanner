@@ -7,6 +7,7 @@ target 'FJScanner' do
 
   # Pods for FJScanner
   pod 'RealmSwift'
+  pod 'SnapKit', '~> 4.0.0'
 
 
   target 'FJScannerTests' do
