@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A535F7562158DDFB009D9FDE /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F7552158DDFB009D9FDE /* Toast.swift */; };
+		A535F75A2158EBE7009D9FDE /* FJCollectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F7592158EBE7009D9FDE /* FJCollectTableViewCell.swift */; };
+		A535F75C2158F00C009D9FDE /* FJMessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */; };
+		A535F75E2158F299009D9FDE /* FJUISchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F75D2158F299009D9FDE /* FJUISchema.swift */; };
 		A54B0359213EE5C6003EC412 /* FJQRMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54B0358213EE5C6003EC412 /* FJQRMessage.swift */; };
 		A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AE93213D8A5F0009540D /* AppDelegate.swift */; };
 		A5B1AE9B213D8A610009540D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B1AE9A213D8A610009540D /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 		6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.debug.xcconfig"; sourceTree = "<group>"; };
 		8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.release.xcconfig"; sourceTree = "<group>"; };
 		A535F7552158DDFB009D9FDE /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		A535F7592158EBE7009D9FDE /* FJCollectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJCollectTableViewCell.swift; sourceTree = "<group>"; };
+		A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJMessageDetailViewController.swift; sourceTree = "<group>"; };
+		A535F75D2158F299009D9FDE /* FJUISchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJUISchema.swift; sourceTree = "<group>"; };
 		A54B0358213EE5C6003EC412 /* FJQRMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJQRMessage.swift; sourceTree = "<group>"; };
 		A5B1AE90213D8A5F0009540D /* FJScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FJScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B1AE93213D8A5F0009540D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 				A5B1AEC3213D8C120009540D /* FJRootViewController.swift */,
 				A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */,
 				A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */,
+				A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -127,8 +134,24 @@
 			isa = PBXGroup;
 			children = (
 				A535F7552158DDFB009D9FDE /* Toast.swift */,
+				A535F75D2158F299009D9FDE /* FJUISchema.swift */,
 			);
 			path = Uitls;
+			sourceTree = "<group>";
+		};
+		A535F7572158E670009D9FDE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A535F7592158EBE7009D9FDE /* FJCollectTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A535F7582158E677009D9FDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A5B1AE87213D8A5F0009540D = {
@@ -156,6 +179,8 @@
 		A5B1AE92213D8A5F0009540D /* FJScanner */ = {
 			isa = PBXGroup;
 			children = (
+				A535F7582158E677009D9FDE /* View */,
+				A535F7572158E670009D9FDE /* Cell */,
 				A535F7542158DDE7009D9FDE /* Uitls */,
 				A509A070213D9B15000E7E52 /* Model */,
 				A509A06F213D951F000E7E52 /* ViewController */,
@@ -356,12 +381,14 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -414,7 +441,10 @@
 				A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */,
 				A535F7562158DDFB009D9FDE /* Toast.swift in Sources */,
 				A54B0359213EE5C6003EC412 /* FJQRMessage.swift in Sources */,
+				A535F75A2158EBE7009D9FDE /* FJCollectTableViewCell.swift in Sources */,
+				A535F75E2158F299009D9FDE /* FJUISchema.swift in Sources */,
 				A5B1AEC4213D8C120009540D /* FJRootViewController.swift in Sources */,
+				A535F75C2158F00C009D9FDE /* FJMessageDetailViewController.swift in Sources */,
 				A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */,
 				A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */,
 			);
@@ -586,7 +616,10 @@
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScanner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -603,7 +636,10 @@
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScanner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -620,7 +656,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScannerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScannerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -638,7 +678,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScannerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScannerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -655,7 +699,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScannerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScannerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -672,7 +720,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScannerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScannerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

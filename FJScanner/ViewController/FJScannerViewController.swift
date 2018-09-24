@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Photos
+import RealmSwift
 
 
 class FJScannerViewController: FJRootViewController {
@@ -162,7 +163,9 @@ class FJScannerViewController: FJRootViewController {
             
             let status:AVAuthorizationStatus=AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             if status==AVAuthorizationStatus.authorized {//获得权限
-
+                if !self.scanSwitch {
+                    self.scanSwitch = true
+                }
             }
             else if status==AVAuthorizationStatus.denied ||
                     status==AVAuthorizationStatus.restricted {
@@ -205,7 +208,7 @@ class FJScannerViewController: FJRootViewController {
                 return;
             }
             
-            UIApplication.shared.open(url, options: [UIApplicationOpenURLOptionUniversalLinksOnly:NSNumber.init(value: true)], completionHandler: { (success) in
+            UIApplication.shared.open(url, options: [UIApplicationOpenURLOptionUniversalLinksOnly:NSNumber.init(value: false)], completionHandler: { (success) in
                 if !success {
                     self.view.makeToast("打不开链接")
                     self.scanSwitch = true
@@ -219,17 +222,34 @@ class FJScannerViewController: FJRootViewController {
             let pasteboard = UIPasteboard.general
             pasteboard.string = msg
             self.scanSwitch = true
+            self.view.makeToast("复制成功")
         })
         alertController.addAction(copyAction)
 
         let collectAction = UIAlertAction(title: "收藏", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
             self.scanSwitch = true
+            let newQRMessage = FJQRMessage()
+            newQRMessage.name = ""
+            newQRMessage.message = msg
+            newQRMessage.tag = ""
+            do {
+                // Get the default Realm
+                let realm = try Realm()
+                // Persist your data easily
+                try realm.write {
+                    realm.add(newQRMessage)
+                }
+                self.tabBarController?.selectedIndex = 1
+            } catch {
+                self.view.makeToast("保存失败")
+            }
         })
         alertController.addAction(collectAction)
 
         
         present(alertController, animated: true, completion: nil)
     }
+    
     
 }
 

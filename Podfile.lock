@@ -5,22 +5,26 @@ PODS:
   - RealmSwift (3.7.6):
     - Realm (= 3.7.6)
   - SnapKit (4.0.0)
+  - SwiftDate (5.0.9)
 
 DEPENDENCIES:
   - RealmSwift
   - SnapKit (~> 4.0.0)
+  - SwiftDate
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Realm
     - RealmSwift
     - SnapKit
+    - SwiftDate
 
 SPEC CHECKSUMS:
   Realm: 9eaecad54712d6246d08ba34c10f354e4715d7d3
   RealmSwift: 1fe08b4ebaeeaacf17f9ba0343f7b25c9fc31fa6
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftDate: 52b718d32ec006861a2be2756cbfa482d438e781
 
-PODFILE CHECKSUM: 328198d536b5ea768244b7cc73fa66b79af327cb
+PODFILE CHECKSUM: 2a22740807bb2eed8184d4cb9b32e3553235846c
 
 COCOAPODS: 1.5.0
