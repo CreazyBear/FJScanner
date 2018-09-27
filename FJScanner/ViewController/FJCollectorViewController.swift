@@ -68,12 +68,31 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailVC = FJMessageDetailViewController(qrMessage: self.results[indexPath.row])
-        self.hidesBottomBarWhenPushed = true
+        detailVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailVC, animated: true)
-        self.hidesBottomBarWhenPushed = false
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return FJCollectTableViewCell.height(self.results[indexPath.row])
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "删除") { (action, sourceView, completionHandler) in
+            
+            do {
+                try Realm().write {
+                    try Realm().delete(self.results[indexPath.row])
+                }
+                self.setupDataSource()
+            } catch {
+                self.view.makeToast("删除失败")
+            }
+        }
+        deleteAction.backgroundColor = UIColor.red
+        
+        let config = UISwipeActionsConfiguration.init(actions: [deleteAction])
+        return config
+        
+    }
+    
 }

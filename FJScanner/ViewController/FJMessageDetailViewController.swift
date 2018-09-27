@@ -13,7 +13,9 @@ import SnapKit
 class FJMessageDetailViewController: FJRootViewController {
     
     var qrMsg : FJQRMessage
-    var textView = UILabel.init()
+    var textView = UITextView.init()
+    let padding:CGFloat = 18.0
+    let fontSize:CGFloat = 16.0
     
     init(qrMessage qrMsg:FJQRMessage) {
         self.qrMsg = qrMsg
@@ -27,17 +29,50 @@ class FJMessageDetailViewController: FJRootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        self.setupTextView()
+    }
+    
+    func setupTextView() {
+        
         self.view.addSubview(self.textView)
         self.textView.text = self.qrMsg.message
-        self.textView.numberOfLines = 0
         self.textView.textColor = UIColor.black
         self.textView.textAlignment = .center
+        self.textView.font = UIFont.systemFont(ofSize: self.fontSize)
+        self.textView.isEditable = false
         self.textView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(kFJNavigationBarHeight)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        let heightOfTextView = self.qrMsg.message.stringHeightWith(fontSize: self.fontSize, width: kFJWindowWidth - CGFloat(2 * padding), lineSpace: 0)
+        var topPadding = (kFJWindowHeight - kFJNavigationBarHeight - heightOfTextView)/2
+        if topPadding > 100 {
+            topPadding -= kFJNavigationBarHeight
+        }
+        self.textView.contentInset = UIEdgeInsetsMake(topPadding, padding, padding, padding)
+        
+        do {
+            var detector:NSDataDetector?
+            try detector = NSDataDetector.init(types: NSTextCheckingAllSystemTypes)
+            let str = self.qrMsg.message
+            detector?.enumerateMatches(in: str, options: NSRegularExpression.MatchingOptions.reportProgress, range: NSMakeRange(0, str.count), using: { (result:NSTextCheckingResult?, flag:NSRegularExpression.MatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) in
+                guard let result = result else { return }
+                let substring = (str as NSString).substring(with: result.range)
+                print(result.resultType)
+                print(substring)
+                //TODO:把这个放到attrbute字符串中，然后，通过回调拿出来
+            })
+        } catch  {
+            
+        }
+        
+        
+        
+        
+
     }
     
 }
+

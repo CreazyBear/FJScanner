@@ -17,6 +17,7 @@ class FJCollectTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(title)
         self.title.numberOfLines = 1
+        self.title.lineBreakMode = .byTruncatingMiddle
         self.title.textAlignment = .left
         self.title.textColor = UIColor.black
         self.title.font = UIFont.systemFont(ofSize: 14)

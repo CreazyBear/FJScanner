@@ -199,10 +199,14 @@ class FJScannerViewController: FJRootViewController {
     
     
     func makeAlert(_ msg:String) {
-        let alertController = UIAlertController(title: msg, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title: "\n\(msg)\n", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         let openAction = UIAlertAction(title: "打开", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
-            guard let url = URL.init(string: msg) else {
+            var msgCache = msg
+            if msgCache.hasPrefix("www.") {
+                msgCache = String.init(format: "https://%@", msgCache)
+            }
+            guard let url = URL.init(string: msgCache) else {
                 self.view.makeToast("打不开链接")
                 self.scanSwitch = true
                 return;
@@ -239,7 +243,7 @@ class FJScannerViewController: FJRootViewController {
                 try realm.write {
                     realm.add(newQRMessage)
                 }
-                self.tabBarController?.selectedIndex = 1
+                self.scanSwitch = true
             } catch {
                 self.view.makeToast("保存失败")
             }
