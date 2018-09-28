@@ -16,6 +16,11 @@ class FJRootViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = self.navigationController!.tabBarItem.title
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

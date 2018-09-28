@@ -40,6 +40,7 @@ class FJMessageDetailViewController: FJRootViewController {
         self.textView.textAlignment = .center
         self.textView.font = UIFont.systemFont(ofSize: self.fontSize)
         self.textView.isEditable = false
+        self.textView.dataDetectorTypes = .all
         self.textView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(kFJNavigationBarHeight)
             make.left.equalToSuperview()
@@ -52,27 +53,6 @@ class FJMessageDetailViewController: FJRootViewController {
             topPadding -= kFJNavigationBarHeight
         }
         self.textView.contentInset = UIEdgeInsetsMake(topPadding, padding, padding, padding)
-        
-        do {
-            var detector:NSDataDetector?
-            try detector = NSDataDetector.init(types: NSTextCheckingAllSystemTypes)
-            let str = self.qrMsg.message
-            detector?.enumerateMatches(in: str, options: NSRegularExpression.MatchingOptions.reportProgress, range: NSMakeRange(0, str.count), using: { (result:NSTextCheckingResult?, flag:NSRegularExpression.MatchingFlags, stop:UnsafeMutablePointer<ObjCBool>) in
-                guard let result = result else { return }
-                let substring = (str as NSString).substring(with: result.range)
-                print(result.resultType)
-                print(substring)
-                //TODO:把这个放到attrbute字符串中，然后，通过回调拿出来
-            })
-        } catch  {
-            
-        }
-        
-        
-        
-        
-
     }
     
 }
-

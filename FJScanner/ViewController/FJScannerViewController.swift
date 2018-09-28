@@ -58,7 +58,6 @@ class FJScannerViewController: FJRootViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.title = self.navigationController!.tabBarItem.title
         
         let status:AVAuthorizationStatus=AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         if status==AVAuthorizationStatus.authorized {//获得权限
@@ -70,6 +69,15 @@ class FJScannerViewController: FJRootViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.scanSwitch = false
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for ele in touches {
+            if ele.tapCount == 2 {
+                self.lightButtonClick()
+                break
+            }
+        }
     }
     
     //MARK: - private
@@ -105,7 +113,7 @@ class FJScannerViewController: FJRootViewController {
             
             // Set delegate and use the default dispatch queue to execute the call back
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = [.qr]
+            captureMetadataOutput.metadataObjectTypes = [.qr,.upce,.ean8,.ean13,.code39Mod43,.code39,.code93,.code128,.pdf417]
             
             // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
@@ -168,7 +176,7 @@ class FJScannerViewController: FJRootViewController {
                 }
             }
             else if status==AVAuthorizationStatus.denied ||
-                    status==AVAuthorizationStatus.restricted {
+                status==AVAuthorizationStatus.restricted {
                 self.gotoSetting()
             }
             
@@ -199,7 +207,7 @@ class FJScannerViewController: FJRootViewController {
     
     
     func makeAlert(_ msg:String) {
-        let alertController = UIAlertController(title: "\n\(msg)\n", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title: "扫描结果", message: msg, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         let openAction = UIAlertAction(title: "打开", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
             var msgCache = msg
@@ -229,7 +237,7 @@ class FJScannerViewController: FJRootViewController {
             self.view.makeToast("复制成功")
         })
         alertController.addAction(copyAction)
-
+        
         let collectAction = UIAlertAction(title: "收藏", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
             self.scanSwitch = true
             let newQRMessage = FJQRMessage()
@@ -249,10 +257,39 @@ class FJScannerViewController: FJRootViewController {
             }
         })
         alertController.addAction(collectAction)
-
+        
+        let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (cancle :UIAlertAction) in
+            self.scanSwitch = true
+        }
+        alertController.addAction(cancleAction)
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func lightButtonClick() {
+        let device = AVCaptureDevice.default(for: AVMediaType.video)
+        if device == nil {
+            return
+        }
+        if device?.torchMode == AVCaptureDevice.TorchMode.off{
+            do {
+                try device?.lockForConfiguration()
+            } catch {
+                return
+            }
+            device?.torchMode = .on
+            device?.unlockForConfiguration()
+        }else {
+            do {
+                try device?.lockForConfiguration()
+            } catch {
+                return
+            }
+            device?.torchMode = .off
+            device?.unlockForConfiguration()
+        }
+    }
+    
     
     
 }
@@ -277,6 +314,13 @@ extension FJScannerViewController:AVCaptureMetadataOutputObjectsDelegate {
                 self.scanSwitch = false
                 self.makeAlert(metadataObj.stringValue!)
             }
+        }
+        else {
+            if metadataObj.stringValue != nil && self.scanSwitch {
+                self.scanSwitch = false
+                self.makeAlert(metadataObj.stringValue!)
+            }
+
         }
     }
 }

@@ -21,7 +21,6 @@ class FJCollectorViewController: FJRootViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = self.navigationController!.tabBarItem.title
         self.setupDataSource()
         self.setupTableView()
         
@@ -93,6 +92,17 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
         let config = UISwipeActionsConfiguration.init(actions: [deleteAction])
         return config
         
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let generateAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "生成\n图片") { (action, sourceView, completionHandler) in
+            
+            //TODO:保存图片到相册
+        }
+        generateAction.backgroundColor = UIColor.orange
+        let config = UISwipeActionsConfiguration.init(actions: [generateAction])
+        return config
+
     }
     
 }

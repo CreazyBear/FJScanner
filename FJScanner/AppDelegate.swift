@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var tabBarVC: UITabBarController?
     var tabOneNav: UINavigationController?
     var tabTwoNav: UINavigationController?
+    var tabTreeNav: UINavigationController?
     
     var rootOneVC: FJScannerViewController?
     var rootTwoVC: FJCollectorViewController?
+    var rootTreeVC: FJImageGeneratorViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,16 +27,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.rootOneVC = FJScannerViewController()
         self.rootTwoVC = FJCollectorViewController()
+        self.rootTreeVC = FJImageGeneratorViewController()
         
         self.tabBarVC = UITabBarController.init()
         self.tabOneNav = UINavigationController.init(rootViewController: self.rootOneVC!)
         self.tabTwoNav = UINavigationController.init(rootViewController: self.rootTwoVC!)
+        self.tabTreeNav = UINavigationController.init(rootViewController: self.rootTreeVC!)
         
-        self.tabBarVC?.setViewControllers([self.tabOneNav!,self.tabTwoNav!], animated: true)
+        self.tabBarVC?.setViewControllers([self.tabOneNav!,self.tabTwoNav!,self.tabTreeNav!], animated: true)
         self.tabOneNav?.tabBarItem.title = "扫码"
         self.tabOneNav?.tabBarItem.image = UIImage.init(named: "camera")
         self.tabTwoNav?.tabBarItem.title = "收藏"
         self.tabTwoNav?.tabBarItem.image = UIImage.init(named: "mine")
+        self.tabTreeNav?.tabBarItem.title = "生成"
+        self.tabTreeNav?.tabBarItem.image = UIImage.init(named: "image")
         
         self.window?.rootViewController = self.tabBarVC;
         self.window?.makeKeyAndVisible()

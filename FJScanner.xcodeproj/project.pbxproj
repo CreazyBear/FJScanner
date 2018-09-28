@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A533C0B7215E8892002ED0FB /* FJImageGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533C0B6215E8892002ED0FB /* FJImageGeneratorViewController.swift */; };
 		A535F7562158DDFB009D9FDE /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F7552158DDFB009D9FDE /* Toast.swift */; };
 		A535F75A2158EBE7009D9FDE /* FJCollectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F7592158EBE7009D9FDE /* FJCollectTableViewCell.swift */; };
 		A535F75C2158F00C009D9FDE /* FJMessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */; };
@@ -51,6 +52,7 @@
 		68132069F1F7C1E0A0967105 /* Pods-FJScannerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScannerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScannerUITests/Pods-FJScannerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.debug.xcconfig"; sourceTree = "<group>"; };
 		8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.release.xcconfig"; sourceTree = "<group>"; };
+		A533C0B6215E8892002ED0FB /* FJImageGeneratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJImageGeneratorViewController.swift; sourceTree = "<group>"; };
 		A535F7552158DDFB009D9FDE /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		A535F7592158EBE7009D9FDE /* FJCollectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJCollectTableViewCell.swift; sourceTree = "<group>"; };
 		A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJMessageDetailViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */,
 				A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */,
 				A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */,
+				A533C0B6215E8892002ED0FB /* FJImageGeneratorViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A533C0B7215E8892002ED0FB /* FJImageGeneratorViewController.swift in Sources */,
 				A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */,
 				A54D89DC215BCDB9002810CE /* FJQRMessageAnalyser.swift in Sources */,
 				A535F7562158DDFB009D9FDE /* Toast.swift in Sources */,
