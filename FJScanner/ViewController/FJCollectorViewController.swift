@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Photos
 
 class FJCollectorViewController: FJRootViewController {
     
@@ -95,14 +96,93 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let generateAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "生成\n图片") { (action, sourceView, completionHandler) in
+        let generateAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "生成\n二维码") { (action, sourceView, completionHandler) in
             
-            //TODO:保存图片到相册
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                
+                switch status {
+                case .notDetermined:
+                    self.gotoSetting()
+                    break
+                case .restricted:
+                    //此应用程序没有被授权访问的照片数据
+                    self.view.makeToast("此应用程序没有被授权访问的照片数据")
+                    break
+                case .denied:
+                    //用户已经明确否认了这一照片数据的应用程序访问
+                    self.gotoSetting()
+                    break
+                case .authorized:
+                    DispatchQueue.main.async {
+                        self.saveQRImageToPhoto(message: self.results[indexPath.row].message)
+                    }
+                    break
+                }
+            })
+            
         }
         generateAction.backgroundColor = UIColor.orange
-        let config = UISwipeActionsConfiguration.init(actions: [generateAction])
+        
+        
+        let copyAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "复制") { (action, sourceView, handler) in
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = self.results[indexPath.row].message
+            self.view.makeToast("复制成功")
+        }
+        copyAction.backgroundColor = UIColor.brown
+        
+        let shareAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "分享") { (action, sourceView, handler) in
+            let shareText = self.results[indexPath.row].message
+            let shareImage = FJQRImageGenerateUtil.setupQRCodeImage(shareText, image: nil)
+            let shareItem = [shareText, shareImage] as [Any]
+            let activityVC = UIActivityViewController.init(activityItems: shareItem, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [.postToVimeo, .postToFlickr, .postToFacebook, .postToTwitter]
+            self.present(activityVC, animated: true, completion: nil)
+//            activityVC.completionWithItemsHandler = {(activityType, completed, returnedItems, activityError) in }
+            
+        }
+        shareAction.backgroundColor = UIColor.magenta
+        
+        let config = UISwipeActionsConfiguration.init(actions: [generateAction,copyAction,shareAction])
         return config
 
     }
     
+    func saveQRImageToPhoto(message:String) {
+
+        let image = FJQRImageGenerateUtil.setupQRCodeImage(message, image: nil)
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }) { (isSuccess: Bool, error: Error?) in
+            DispatchQueue.main.async {
+                if isSuccess {
+                    self.view.makeToast("保存成功")
+                } else{
+                    self.view.makeToast("保存失败")
+                }
+            }
+        }
+    }
+    
+    //去设置权限
+    func gotoSetting(){
+        
+        let alertController:UIAlertController = UIAlertController.init(title: "设置应用权限",
+                                                                       message: "设置-》通用-》",
+                                                                       preferredStyle: UIAlertControllerStyle.alert)
+        
+        let sure:UIAlertAction = UIAlertAction.init(title: "去开启权限", style: UIAlertActionStyle.default) { (ac) in
+            
+            let url=URL.init(string: UIApplicationOpenSettingsURLString)
+            
+            if UIApplication.shared.canOpenURL(url!){
+                
+                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
+                    
+                })
+            }
+        }
+        alertController.addAction(sure)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
