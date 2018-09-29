@@ -168,7 +168,7 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
     func gotoSetting(){
         
         let alertController:UIAlertController = UIAlertController.init(title: "设置应用权限",
-                                                                       message: "设置-》通用-》",
+                                                                       message: "设置 -> 通用 ->",
                                                                        preferredStyle: UIAlertControllerStyle.alert)
         
         let sure:UIAlertAction = UIAlertAction.init(title: "去开启权限", style: UIAlertActionStyle.default) { (ac) in
