@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Photos
 
 class FJImageGeneratorViewController: FJRootViewController {
     
@@ -17,12 +18,10 @@ class FJImageGeneratorViewController: FJRootViewController {
     let addTextButton = UIButton.init()
     let addImageButton = UIButton.init()
     let addLogoButton = UIButton.init()
+    let addSaveButton = UIButton.init()
     
     let imageBoard = UIImageView.init()
-    let qrImageBoard = UIImageView.init()
-    let photoBoard = UIImageView.init()
-    
-    var totalDegree:Int64 = 0
+    var selectImage = UIImage.init()
     
     var text:String = ""
         
@@ -39,17 +38,14 @@ class FJImageGeneratorViewController: FJRootViewController {
         self.view.addSubview(self.addTextButton)
         self.view.addSubview(self.addImageButton)
         self.view.addSubview(self.addLogoButton)
+        self.view.addSubview(self.addSaveButton)
         self.view.addSubview(self.menu)
         
     }
     
     func configImageBoard() {
-        self.imageBoard.addSubview(self.photoBoard)
-        self.imageBoard.addSubview(self.qrImageBoard)
         
         self.imageBoard.contentMode = .scaleAspectFit
-        self.qrImageBoard.contentMode = .scaleAspectFit
-        self.photoBoard.contentMode = .scaleAspectFit
         
         self.imageBoard.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
@@ -57,23 +53,6 @@ class FJImageGeneratorViewController: FJRootViewController {
             make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
             make.right.equalToSuperview()
         }
-//        self.photoBoard.frame = self.imageBoard.bounds
-//        self.qrImageBoard.frame = self.imageBoard.bounds
-
-// 监听移动手势
-//        self.qrImageBoard.isUserInteractionEnabled = true
-//        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handleQrImagePangeGesture(gesture:)))
-//        self.qrImageBoard.addGestureRecognizer(panGesture)
-
-//  监听旋转手势
-//        let rotationGestureRecgonizer = UIRotationGestureRecognizer.init(target: self, action: #selector(handleRotationGesture(_:)))
-//        rotationGestureRecgonizer.delegate = self
-//        self.qrImageBoard.addGestureRecognizer(rotationGestureRecgonizer)
-
-// 监听缩放手势
-//        let pinchGestureRecgonizer = UIPinchGestureRecognizer.init(target: self, action: #selector(handlePinchGesture(_:)))
-//        pinchGestureRecgonizer.delegate = self
-//        self.qrImageBoard.addGestureRecognizer(pinchGestureRecgonizer)
     }
     
     func configButtons() {
@@ -105,9 +84,19 @@ class FJImageGeneratorViewController: FJRootViewController {
         self.addLogoButton.tag = 3
         self.addLogoButton.addTarget(self, action: #selector(buttonAction(sender:)), for: UIControlEvents.touchUpInside)
         
+        self.addSaveButton.layer.cornerRadius = 3
+        self.addSaveButton.layer.borderColor = UIColor.darkGray.cgColor
+        self.addSaveButton.backgroundColor = UIColor.white
+        self.addSaveButton.layer.borderWidth = 2
+        self.addSaveButton.setTitleColor(UIColor.black, for: UIControlState.normal)
+        self.addSaveButton.titleEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        self.addSaveButton.tag = 4
+        self.addSaveButton.addTarget(self, action: #selector(buttonAction(sender:)), for: UIControlEvents.touchUpInside)
+        
         self.addTextButton.setTitle("文本", for: UIControlState.normal)
         self.addImageButton.setTitle("背景", for: UIControlState.normal)
         self.addLogoButton.setTitle("删除", for: UIControlState.normal)
+        self.addSaveButton.setTitle("保存", for: UIControlState.normal)
         
         
         self.menu.snp.makeConstraints { (make) in
@@ -135,9 +124,17 @@ class FJImageGeneratorViewController: FJRootViewController {
             make.width.equalTo(50)
         }
         
+        self.addSaveButton.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.menu.snp.centerX)
+            make.centerY.equalTo(self.menu.snp.centerY)
+            make.width.equalTo(50)
+        }
+
+        
         self.addImageButton.alpha = 0
         self.addLogoButton.alpha = 0
         self.addTextButton.alpha = 0
+        self.addSaveButton.alpha = 0
     }
     
     @objc func buttonAction(sender:UIButton) {
@@ -181,8 +178,10 @@ class FJImageGeneratorViewController: FJRootViewController {
         }
         else if sender.tag == 3 {//delete
             self.text = ""
-            self.qrImageBoard.image = nil
-            self.photoBoard.image = nil
+            self.imageBoard.image = nil
+        }
+        else if sender.tag == 4 {//保存
+            self.saveQRImageToPhoto()
         }
     }
     
@@ -194,17 +193,22 @@ class FJImageGeneratorViewController: FJRootViewController {
                 self.addImageButton.alpha = 1
                 self.addLogoButton.alpha = 1
                 self.addTextButton.alpha = 1
+                self.addSaveButton.alpha = 1
                 
                 
                 self.addTextButton.snp.updateConstraints({ (make) in
-                    make.centerY.equalTo(self.menu).offset(-130)
+                    make.centerY.equalTo(self.menu).offset(-170)
                 })
                 
                 self.addImageButton.snp.updateConstraints({ (make) in
-                    make.centerY.equalTo(self.menu).offset(-90)
+                    make.centerY.equalTo(self.menu).offset(-130)
                 })
                 
                 self.addLogoButton.snp.updateConstraints({ (make) in
+                    make.centerY.equalTo(self.menu).offset(-90)
+                })
+                
+                self.addSaveButton.snp.updateConstraints({ (make) in
                     make.centerY.equalTo(self.menu).offset(-50)
                 })
                 self.view.layoutIfNeeded()
@@ -216,18 +220,24 @@ class FJImageGeneratorViewController: FJRootViewController {
                 self.addImageButton.alpha = 0
                 self.addLogoButton.alpha = 0
                 self.addTextButton.alpha = 0
+                self.addSaveButton.alpha = 0
 
                 self.addTextButton.snp.updateConstraints({ (make) in
-                    make.centerY.equalTo(self.menu).offset(130)
+                    make.centerY.equalTo(self.menu).offset(170)
                 })
                 
                 self.addImageButton.snp.updateConstraints({ (make) in
-                    make.centerY.equalTo(self.menu).offset(90)
+                    make.centerY.equalTo(self.menu).offset(130)
                 })
                 
                 self.addLogoButton.snp.updateConstraints({ (make) in
+                    make.centerY.equalTo(self.menu).offset(90)
+                })
+                
+                self.addSaveButton.snp.updateConstraints({ (make) in
                     make.centerY.equalTo(self.menu).offset(50)
                 })
+                
                 self.view.layoutIfNeeded()
 
             }
@@ -235,95 +245,54 @@ class FJImageGeneratorViewController: FJRootViewController {
     }
     
     func handleUserInputText(text:String) {
-        
+        self.text = text
         let qrImage = FJQRImageGenerateUtil.setupQRCodeImage(text, image: nil)
-        if self.photoBoard.image == nil {
-            self.qrImageBoard.frame = self.imageBoard.bounds
+        
+        if self.selectImage.size == CGSize.zero {
+            self.imageBoard.image = qrImage
         }
         else {
-            if self.text.count <= 0 {
-                self.qrImageBoard.frame = CGRect.init(x: 20, y: 20, width: 200, height: 200)
-            }
+            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 150, height: 150)
         }
-        self.qrImageBoard.image = qrImage
-        self.text = text
+        
     }
     
     func handleUserSelectImage(selectImage:UIImage) {
+        self.selectImage = selectImage
         if self.text.count > 0 {
-            if self.photoBoard.image == nil {
-                self.qrImageBoard.frame = CGRect.init(x: 20, y: 20, width: 200, height: 200)
-            }
-            self.photoBoard.image = selectImage
-            
+            let qrImage = FJQRImageGenerateUtil.setupQRCodeImage(self.text, image: nil)
+            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 150, height: 150)
         }
         else {
-            self.photoBoard.frame = self.imageBoard.bounds
-            self.photoBoard.image = selectImage
+            self.imageBoard.image = selectImage
         }
-    }
-    
-    @objc func handleQrImagePangeGesture(gesture:UIPanGestureRecognizer) {
-        let targetView = gesture.view
-        guard targetView != nil else {
-            return
-        }
-        if photoBoard.image == nil {
-            return
-        }
-        let transP = gesture.translation(in: targetView)
-        targetView!.transform = targetView!.transform.translatedBy(x: transP.x, y: transP.y)
-        gesture.setTranslation(CGPoint.zero, in: targetView)
-    }
-    
-    @objc func handleRotationGesture(_ gesture:UIRotationGestureRecognizer) {
-        let targetView = gesture.view
-        guard targetView != nil else {
-            return
-        }
-        if photoBoard.image == nil {
-            return
-        }
-        targetView!.transform = targetView!.transform.rotated(by: gesture.rotation)
-        gesture.rotation = 0
-
-        
-        
-        //TODO: 手平时反馈
-//        let centerPointX = targetView!.convert(targetView!.center, to: self.imageBoard).x
-//        let originPointX = targetView?.frame.origin.x ?? 0
-//        let width = targetView?.frame.width ?? 0
-//        let height = targetView?.frame.height ?? 0
-//
-//        if fabs(centerPointX - originPointX)/width <= 0.1 {
-////            self.callFeddBack()
-//        }
-//        else if  fabs(fabs(centerPointX - originPointX) - width/2)/width <= 0.095 {
-//            self.callFeddBack()
-//        }
-//        else if fabs(fabs(centerPointX - originPointX) - height/2)/height <= 0.095 {
-//            self.callFeddBack()
-//        }
-
-    }
-    
-    @objc func handlePinchGesture(_ gesture:UIPinchGestureRecognizer) {
-        let targetView = gesture.view
-        guard targetView != nil else {
-            return
-        }
-        if photoBoard.image == nil {
-            return
-        }
-        targetView!.transform = targetView!.transform.scaledBy(x: gesture.scale, y: gesture.scale)
-        gesture.scale = 1.0
-        
     }
     
     func callFeddBack() {
         let feedBackGenertor = UIImpactFeedbackGenerator.init(style: UIImpactFeedbackStyle.medium)
         feedBackGenertor.impactOccurred()
     }
+    
+    func saveQRImageToPhoto() {
+        
+        let image = self.imageBoard.image
+        guard image != nil && image?.size != CGSize.zero else {
+            self.view.makeToast("保存失败")
+            return
+        }
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image!)
+        }) { (isSuccess: Bool, error: Error?) in
+            DispatchQueue.main.async {
+                if isSuccess {
+                    self.view.makeToast("保存成功")
+                } else{
+                    self.view.makeToast("保存失败")
+                }
+            }
+        }
+    }
+
 
 }
 
