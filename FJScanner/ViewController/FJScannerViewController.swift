@@ -17,6 +17,8 @@ class FJScannerViewController: FJRootViewController {
     var captureSession : AVCaptureSession?
     var videoPreviewLayer : AVCaptureVideoPreviewLayer?
     var dest:FJRootViewController? = nil
+    let menu = UIImageView.init(image: UIImage.init(named: "plus"))
+    var contentView = UIView.init()
     
     var scanSwitch : Bool {
         willSet {
@@ -54,11 +56,30 @@ class FJScannerViewController: FJRootViewController {
         center.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: mainQueue) { (note) in
             self.scanSwitch = false
         }
+        self.view.addSubview(self.contentView)
+        self.contentView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview().offset(kFJNavigationBarHeight)
+            make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
+            make.right.equalToSuperview()
+        }
+        self.contentView.alpha = 1
+        
+        self.view.addSubview(self.menu)
+        self.menu.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-18)
+            make.bottom.equalToSuperview().offset(-kFJTabBarHeight - 20)
+        }
+        
+        self.menu.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(onMenuTap(sender:)))
+        self.menu.addGestureRecognizer(tapGesture)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.view.bringSubview(toFront: self.menu)
         let status:AVAuthorizationStatus=AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         if status==AVAuthorizationStatus.authorized {//获得权限
             self.setupCaptureDeviceAndSession()
@@ -118,12 +139,12 @@ class FJScannerViewController: FJRootViewController {
             // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            videoPreviewLayer?.frame = view.layer.bounds
+            videoPreviewLayer?.frame = self.contentView.layer.bounds
             guard videoPreviewLayer != nil else {
                 print("create AVCaptureVideoPreviewLayer error")
                 return
             }
-            view.layer.addSublayer(videoPreviewLayer!)
+            self.contentView.layer.addSublayer(videoPreviewLayer!)
             
         } catch {
             // If any error occurs, simply log the description of it and don't continue any more.
@@ -290,7 +311,42 @@ class FJScannerViewController: FJRootViewController {
         }
     }
     
+    @objc func onMenuTap(sender:UITapGestureRecognizer) {
+        self.scanSwitch = false
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            self.present(imagePicker,animated: true)
+            
+        }
+    }
     
+    func handleUserSelectImage(image:UIImage) {
+        guard let ciImage = CIImage(image: image) else {
+            self.view.makeToast("识别失败")
+            return
+        }
+        // 2.从选中的图片中读取二维码数据
+        // 2.1创建一个探测器
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])
+        guard detector != nil else {
+            self.view.makeToast("识别失败")
+            return
+        }
+        // 2.2利用探测器探测数据
+        let results = detector!.features(in: ciImage)
+        // 2.3取出探测到的数据
+        for result in results {
+            guard (result as! CIQRCodeFeature).messageString != nil else {
+                continue
+            }
+            self.makeAlert((result as! CIQRCodeFeature).messageString!)
+            return
+        }
+        self.view.makeToast("没有找到可以识别的二维码")
+    }
     
 }
 
@@ -323,5 +379,17 @@ extension FJScannerViewController:AVCaptureMetadataOutputObjectsDelegate {
 
         }
     }
+    
 }
 
+extension FJScannerViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.dismiss(animated: false, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            self.handleUserSelectImage(image: image)
+        }
+        else {
+            print("pick image wrong")
+        }
+    }
+}

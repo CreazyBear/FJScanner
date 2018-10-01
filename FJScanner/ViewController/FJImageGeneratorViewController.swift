@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Photos
+import RealmSwift
 
 class FJImageGeneratorViewController: FJRootViewController {
     
@@ -183,6 +184,22 @@ class FJImageGeneratorViewController: FJRootViewController {
         }
         else if sender.tag == 4 {//保存
             self.saveQRImageToPhoto()
+            
+            let newQRMessage = FJQRMessage()
+            newQRMessage.name = ""
+            newQRMessage.message = self.text
+            newQRMessage.tag = ""
+            do {
+                // Get the default Realm
+                let realm = try Realm()
+                // Persist your data easily
+                try realm.write {
+                    realm.add(newQRMessage)
+                }
+            } catch {
+                
+            }
+
         }
     }
     
