@@ -95,7 +95,7 @@ class FJImageGeneratorViewController: FJRootViewController {
         
         self.addTextButton.setTitle("文本", for: UIControlState.normal)
         self.addImageButton.setTitle("背景", for: UIControlState.normal)
-        self.addLogoButton.setTitle("删除", for: UIControlState.normal)
+        self.addLogoButton.setTitle("清空", for: UIControlState.normal)
         self.addSaveButton.setTitle("保存", for: UIControlState.normal)
         
         
@@ -179,6 +179,7 @@ class FJImageGeneratorViewController: FJRootViewController {
         else if sender.tag == 3 {//delete
             self.text = ""
             self.imageBoard.image = nil
+            self.selectImage = UIImage.init()
         }
         else if sender.tag == 4 {//保存
             self.saveQRImageToPhoto()
