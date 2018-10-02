@@ -90,13 +90,45 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
         }
         deleteAction.backgroundColor = UIColor.red
         
-        let config = UISwipeActionsConfiguration.init(actions: [deleteAction])
+        let changeNameAction = UIContextualAction.init(style: UIContextualAction.Style.normal, title: "改名") { (action, sourceView, completionhandler) in
+            var inputText:UITextField = UITextField();
+            let msgAlertCtr = UIAlertController.init(title: "提示", message: "请输入名称", preferredStyle: .alert)
+            let ok = UIAlertAction.init(title: "确定", style:.default) { (action:UIAlertAction) ->() in
+                if((inputText.text) != ""){
+                    let realm = try! Realm()
+                    let message = self.results[indexPath.row]
+                    try! realm.write() {
+                        message.name = inputText.text!
+                    }
+                    self.setupDataSource()
+                }
+                else {
+                    self.view.makeToast("内容不能为空")
+                }
+            }
+            
+            let cancel = UIAlertAction.init(title: "取消", style:.cancel) { (action:UIAlertAction) -> ()in
+                
+            }
+            msgAlertCtr.addAction(ok)
+            msgAlertCtr.addAction(cancel)
+            //添加textField输入框
+            msgAlertCtr.addTextField { (textField) in
+                //设置传入的textField为初始化UITextField
+                inputText = textField
+            }
+            //设置到当前视图
+            self.present(msgAlertCtr, animated: true, completion: nil)
+        }
+        changeNameAction.backgroundColor = UIColor.blue
+        
+        let config = UISwipeActionsConfiguration.init(actions: [deleteAction,changeNameAction])
         return config
         
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let generateAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "生成\n二维码") { (action, sourceView, completionHandler) in
+        let generateAction = UIContextualAction.init(style: UIContextualAction.Style.normal, title: "生成\n二维码") { (action, sourceView, completionHandler) in
             
             PHPhotoLibrary.requestAuthorization({ (status) in
                 
@@ -124,14 +156,14 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
         generateAction.backgroundColor = UIColor.orange
         
         
-        let copyAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "复制") { (action, sourceView, handler) in
+        let copyAction = UIContextualAction.init(style: UIContextualAction.Style.normal, title: "复制") { (action, sourceView, handler) in
             let pasteboard = UIPasteboard.general
             pasteboard.string = self.results[indexPath.row].message
             self.view.makeToast("复制成功")
         }
         copyAction.backgroundColor = UIColor.brown
         
-        let shareAction = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "分享") { (action, sourceView, handler) in
+        let shareAction = UIContextualAction.init(style: UIContextualAction.Style.normal, title: "分享") { (action, sourceView, handler) in
             let shareText = self.results[indexPath.row].message
             let shareImage = FJQRImageGenerateUtil.setupQRCodeImage(shareText, image: nil)
             let shareItem = [shareText, shareImage] as [Any]

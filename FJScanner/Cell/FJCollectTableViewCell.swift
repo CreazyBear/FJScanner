@@ -48,7 +48,12 @@ class FJCollectTableViewCell: UITableViewCell {
     }
 
     func bindData(_ model:FJQRMessage) {
-        self.title.text = model.message
+        if model.name.count <= 0 {
+            self.title.text = model.message
+        }
+        else {
+            self.title.text = model.name
+        }
         self.time.text = model.createTime
     }
     

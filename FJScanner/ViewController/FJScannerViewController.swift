@@ -262,7 +262,7 @@ class FJScannerViewController: FJRootViewController {
         let collectAction = UIAlertAction(title: "收藏", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
             self.scanSwitch = true
             let newQRMessage = FJQRMessage()
-            newQRMessage.name = ""
+            newQRMessage.name = msg
             newQRMessage.message = msg
             newQRMessage.tag = ""
             do {

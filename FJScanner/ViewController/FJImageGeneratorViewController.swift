@@ -186,7 +186,7 @@ class FJImageGeneratorViewController: FJRootViewController {
             self.saveQRImageToPhoto()
             
             let newQRMessage = FJQRMessage()
-            newQRMessage.name = ""
+            newQRMessage.name = self.text
             newQRMessage.message = self.text
             newQRMessage.tag = ""
             do {
