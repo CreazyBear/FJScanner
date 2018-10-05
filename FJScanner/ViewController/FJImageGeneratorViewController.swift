@@ -183,7 +183,16 @@ class FJImageGeneratorViewController: FJRootViewController {
             self.selectImage = UIImage.init()
         }
         else if sender.tag == 4 {//保存
-            self.saveQRImageToPhoto()
+            
+            FJQRImageGenerateUtil.saveQRImageToPhoto(message: self.text) { (success, error) in
+                DispatchQueue.main.async {
+                    if success {
+                        self.view.makeToast("二维码图片已成功保存到相册")
+                    } else{
+                        self.view.makeToast("二维码图片创建失败")
+                    }
+                }
+            }
             
             let newQRMessage = FJQRMessage()
             newQRMessage.name = self.text
@@ -290,28 +299,6 @@ class FJImageGeneratorViewController: FJRootViewController {
         let feedBackGenertor = UIImpactFeedbackGenerator.init(style: UIImpactFeedbackStyle.medium)
         feedBackGenertor.impactOccurred()
     }
-    
-    func saveQRImageToPhoto() {
-        
-        let image = self.imageBoard.image
-        guard image != nil && image?.size != CGSize.zero else {
-            self.view.makeToast("保存失败")
-            return
-        }
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAsset(from: image!)
-        }) { (isSuccess: Bool, error: Error?) in
-            DispatchQueue.main.async {
-                if isSuccess {
-                    self.view.makeToast("保存成功")
-                } else{
-                    self.view.makeToast("保存失败")
-                }
-            }
-        }
-    }
-
-
 }
 
 extension FJImageGeneratorViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {

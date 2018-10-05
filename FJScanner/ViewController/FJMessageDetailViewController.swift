@@ -8,12 +8,14 @@
 
 import UIKit
 import SnapKit
+import Photos
 
 
 class FJMessageDetailViewController: FJRootViewController {
     
     var qrMsg : FJQRMessage
     var textView = UITextView.init()
+    var bottomMenu :FJBottomMenuView?
     let padding:CGFloat = 18.0
     let fontSize:CGFloat = 16.0
     
@@ -30,6 +32,13 @@ class FJMessageDetailViewController: FJRootViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         self.setupTextView()
+        self.configBottonMenu()
+        self.configLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = "详情"
     }
     
     func setupTextView() {
@@ -41,12 +50,6 @@ class FJMessageDetailViewController: FJRootViewController {
         self.textView.font = UIFont.systemFont(ofSize: self.fontSize)
         self.textView.isEditable = false
         self.textView.dataDetectorTypes = .all
-        self.textView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(kFJNavigationBarHeight)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
         let heightOfTextView = self.qrMsg.message.stringHeightWith(fontSize: self.fontSize, width: kFJWindowWidth - CGFloat(2 * padding), lineSpace: 0)
         var topPadding = (kFJWindowHeight - kFJNavigationBarHeight - heightOfTextView)/2
         if topPadding > 100 {
@@ -55,4 +58,104 @@ class FJMessageDetailViewController: FJRootViewController {
         self.textView.contentInset = UIEdgeInsetsMake(topPadding, padding, padding, padding)
     }
     
+    
+    
+    func configBottonMenu() {
+        var menuArray:[FJBottomMenuItem] = []
+        
+        let menuItem1 = FJBottomMenuItem()
+        menuItem1.imageName = "contact"
+        menuItem1.action = {
+            //TODO: 添加到联系人
+        }
+        menuArray.append(menuItem1)
+        
+        let menuItem2 = FJBottomMenuItem()
+        menuItem2.imageName = "qrcode"
+        menuItem2.action = {
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                
+                switch status {
+                case .notDetermined:
+                    self.gotoSetting()
+                    break
+                case .restricted:
+                    //此应用程序没有被授权访问的照片数据
+                    self.view.makeToast("此应用程序没有被授权访问的照片数据")
+                    break
+                case .denied:
+                    //用户已经明确否认了这一照片数据的应用程序访问
+                    self.gotoSetting()
+                    break
+                case .authorized:
+                    DispatchQueue.main.async {
+                        FJQRImageGenerateUtil.saveQRImageToPhoto(message: self.qrMsg.message, completionHandler: { (success, error) in
+                            DispatchQueue.main.async {
+                                if success {
+                                    self.view.makeToast("二维码图片已成功保存到相册")
+                                } else{
+                                    self.view.makeToast("二维码图片创建失败")
+                                }
+                            }
+                        })
+                    }
+                    break
+                }
+            })
+
+        }
+        menuArray.append(menuItem2)
+
+        let menuItem3 = FJBottomMenuItem()
+        menuItem3.imageName = "copy"
+        menuItem3.action = {
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = self.qrMsg.message
+            self.view.makeToast("复制成功")
+        }
+        menuArray.append(menuItem3)
+
+        let menuItem5 = FJBottomMenuItem()
+        menuItem5.imageName = "delete"
+        menuItem5.action = {
+            print("删除")
+        }
+        menuArray.append(menuItem5)
+
+        let menuItem6 = FJBottomMenuItem()
+        menuItem6.imageName = "share"
+        menuItem6.action = {
+            let shareText = self.qrMsg.message
+            let shareImage = FJQRImageGenerateUtil.setupQRCodeImage(shareText, image: nil)
+            let shareItem = [shareText, shareImage] as [Any]
+            let activityVC = UIActivityViewController.init(activityItems: shareItem, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [.postToVimeo, .postToFlickr, .postToFacebook, .postToTwitter]
+            self.present(activityVC, animated: true, completion: nil)
+        }
+        menuArray.append(menuItem6)
+
+        self.bottomMenu = FJBottomMenuView.init(items: menuArray)
+        self.view.addSubview(self.bottomMenu!)
+        
+    }
+    
+    func configLayout() {
+        
+        self.textView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(kFJNavigationBarHeight)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(self.view.frame.size.height - self.bottomMenu!.viewHeight - kFJNavigationBarHeight)
+        }
+
+        self.bottomMenu?.snp.makeConstraints({ (make) in
+
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalTo(self.textView.snp.bottom)
+            make.height.equalTo(self.bottomMenu!.viewHeight)
+        })
+        
+
+    }
 }

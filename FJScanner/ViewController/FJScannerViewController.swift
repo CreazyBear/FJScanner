@@ -203,90 +203,7 @@ class FJScannerViewController: FJRootViewController {
             
         })
     }
-    
-    //去设置权限
-    func gotoSetting(){
         
-        let alertController:UIAlertController = UIAlertController.init(title: "设置应用权限",
-                                                                       message: "设置-》通用-》",
-                                                                       preferredStyle: UIAlertControllerStyle.alert)
-        
-        let sure:UIAlertAction = UIAlertAction.init(title: "去开启权限", style: UIAlertActionStyle.default) { (ac) in
-            
-            let url=URL.init(string: UIApplicationOpenSettingsURLString)
-            
-            if UIApplication.shared.canOpenURL(url!){
-                
-                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
-                    
-                })
-            }
-        }
-        alertController.addAction(sure)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    func makeAlert(_ msg:String) {
-        let alertController = UIAlertController(title: "扫描结果", message: msg, preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        let openAction = UIAlertAction(title: "打开", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
-            var msgCache = msg
-            if msgCache.hasPrefix("www.") {
-                msgCache = String.init(format: "https://%@", msgCache)
-            }
-            guard let url = URL.init(string: msgCache) else {
-                self.view.makeToast("打不开链接")
-                self.scanSwitch = true
-                return;
-            }
-            
-            UIApplication.shared.open(url, options: [UIApplicationOpenURLOptionUniversalLinksOnly:NSNumber.init(value: false)], completionHandler: { (success) in
-                if !success {
-                    self.view.makeToast("打不开链接")
-                    self.scanSwitch = true
-                }
-            })
-        })
-        
-        alertController.addAction(openAction)
-        
-        let copyAction = UIAlertAction(title: "复制", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
-            let pasteboard = UIPasteboard.general
-            pasteboard.string = msg
-            self.scanSwitch = true
-            self.view.makeToast("复制成功")
-        })
-        alertController.addAction(copyAction)
-        
-        let collectAction = UIAlertAction(title: "收藏", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
-            self.scanSwitch = true
-            let newQRMessage = FJQRMessage()
-            newQRMessage.name = msg
-            newQRMessage.message = msg
-            newQRMessage.tag = ""
-            do {
-                // Get the default Realm
-                let realm = try Realm()
-                // Persist your data easily
-                try realm.write {
-                    realm.add(newQRMessage)
-                }
-                self.scanSwitch = true
-            } catch {
-                self.view.makeToast("保存失败")
-            }
-        })
-        alertController.addAction(collectAction)
-        
-        let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (cancle :UIAlertAction) in
-            self.scanSwitch = true
-        }
-        alertController.addAction(cancleAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
     func lightButtonClick() {
         let device = AVCaptureDevice.default(for: AVMediaType.video)
         if device == nil {
@@ -390,6 +307,144 @@ extension FJScannerViewController : UIImagePickerControllerDelegate, UINavigatio
         }
         else {
             print("pick image wrong")
+        }
+    }
+}
+
+//MARK: - 设置弹框操作
+extension FJScannerViewController {
+    
+    func makeAlert(_ msg:String) {
+        let alertController = UIAlertController(title: "扫描结果", message: msg, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let openAction = self.addOpenURLAction(msg)
+        if openAction != nil {
+            alertController.addAction(openAction!)
+        }
+        
+        let copyAction = self.addCopyAction(msg)
+        alertController.addAction(copyAction)
+        
+        let collectAction = self.addCollectAction(msg)
+        alertController.addAction(collectAction)
+        
+        let cancleAction = self.addCancleAction()
+        alertController.addAction(cancleAction)
+        
+        let moreAction = self.addMoreAction(msg: msg)
+        if moreAction != nil {
+            alertController.addAction(moreAction!)
+        }
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func addOpenURLAction(_ msg:String) -> UIAlertAction? {
+
+        var msgCache = msg
+        if msgCache.hasPrefix("www.") {
+            msgCache = String.init(format: "https://%@", msgCache)
+        }
+        guard let url = URL.init(string: msgCache) else {
+            self.view.makeToast("打不开链接")
+            self.scanSwitch = true
+            return nil
+        }
+        
+        let openAction = UIAlertAction(title: "打开", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
+    
+            UIApplication.shared.open(url, options: [UIApplicationOpenURLOptionUniversalLinksOnly:NSNumber.init(value: false)], completionHandler: { (success) in
+                if !success {
+                    self.view.makeToast("打不开链接")
+                    self.scanSwitch = true
+                }
+            })
+        })
+        if UIApplication.shared.canOpenURL(url) {
+            return openAction
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func addCopyAction(_ msg:String) -> UIAlertAction {
+        let copyAction = UIAlertAction(title: "复制", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = msg
+            self.scanSwitch = true
+            self.view.makeToast("复制成功")
+        })
+        return copyAction
+    }
+    
+    func addCollectAction(_ msg:String) -> UIAlertAction {
+        let collectAction = UIAlertAction(title: "收藏", style: UIAlertActionStyle.default, handler: {(alert :UIAlertAction!) in
+            self.scanSwitch = true
+            let newQRMessage = FJQRMessage()
+            newQRMessage.name = msg
+            newQRMessage.message = msg
+            newQRMessage.tag = ""
+            do {
+                // Get the default Realm
+                let realm = try Realm()
+                // Persist your data easily
+                try realm.write {
+                    realm.add(newQRMessage)
+                }
+                self.scanSwitch = true
+            } catch {
+                self.view.makeToast("保存失败")
+            }
+        })
+        return collectAction
+    }
+    
+    func addCancleAction() -> UIAlertAction {
+        let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel) { (cancle :UIAlertAction) in
+            self.scanSwitch = true
+        }
+        return cancleAction
+    }
+    
+    func addMoreAction(msg:String) -> UIAlertAction? {
+        let dataDectector : NSDataDetector?
+        var detectCount = 0
+        do {
+            
+            try dataDectector = NSDataDetector.init(types: NSTextCheckingAllTypes)
+            guard dataDectector != nil else {
+                return nil
+            }
+            
+            detectCount = dataDectector!.numberOfMatches(in: msg, options: NSRegularExpression.MatchingOptions.reportProgress, range: NSRange.init(location: 0, length: msg.count))
+        } catch {
+            return nil
+        }
+        if detectCount == 0 {
+            return nil
+        }
+        else {
+            let moreAction = UIAlertAction(title: "更多...", style: UIAlertActionStyle.default) { (more :UIAlertAction) in
+                let newQRMessage = FJQRMessage()
+                newQRMessage.name = msg
+                newQRMessage.message = msg
+                newQRMessage.tag = ""
+                do {
+                    // Get the default Realm
+                    let realm = try Realm()
+                    // Persist your data easily
+                    try realm.write {
+                        realm.add(newQRMessage)
+                    }
+                } catch {
+                }
+                let vc = FJMessageDetailViewController.init(qrMessage: newQRMessage)
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            return moreAction
+
         }
     }
 }

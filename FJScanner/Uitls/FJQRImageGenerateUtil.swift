@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class FJQRImageGenerateUtil: NSObject {
     //MARK: -传进去字符串,生成二维码图片
@@ -116,4 +117,13 @@ class FJQRImageGenerateUtil: NSObject {
         }
         return UIImage()
     }
+    
+    static func saveQRImageToPhoto(message:String, completionHandler: ((Bool, Error?) -> Void)? = nil) {
+        
+        let image = FJQRImageGenerateUtil.setupQRCodeImage(message, image: nil)
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        },completionHandler: completionHandler)
+    }
+
 }

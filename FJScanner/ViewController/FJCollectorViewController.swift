@@ -146,7 +146,15 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
                     break
                 case .authorized:
                     DispatchQueue.main.async {
-                        self.saveQRImageToPhoto(message: self.results[indexPath.row].message)
+                        FJQRImageGenerateUtil.saveQRImageToPhoto(message: self.results[indexPath.row].message, completionHandler: { (isSuccess, error) in
+                            DispatchQueue.main.async {
+                                if isSuccess {
+                                    self.view.makeToast("保存成功")
+                                } else{
+                                    self.view.makeToast("保存失败")
+                                }
+                            }
+                        })
                     }
                     break
                 }
@@ -179,42 +187,5 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
         return config
 
     }
-    
-    func saveQRImageToPhoto(message:String) {
 
-        let image = FJQRImageGenerateUtil.setupQRCodeImage(message, image: nil)
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAsset(from: image)
-        }) { (isSuccess: Bool, error: Error?) in
-            DispatchQueue.main.async {
-                if isSuccess {
-                    self.view.makeToast("保存成功")
-                } else{
-                    self.view.makeToast("保存失败")
-                }
-            }
-        }
-    }
-    
-    //去设置权限
-    func gotoSetting(){
-        
-        let alertController:UIAlertController = UIAlertController.init(title: "设置应用权限",
-                                                                       message: "设置 -> 通用 ->",
-                                                                       preferredStyle: UIAlertControllerStyle.alert)
-        
-        let sure:UIAlertAction = UIAlertAction.init(title: "去开启权限", style: UIAlertActionStyle.default) { (ac) in
-            
-            let url=URL.init(string: UIApplicationOpenSettingsURLString)
-            
-            if UIApplication.shared.canOpenURL(url!){
-                
-                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
-                    
-                })
-            }
-        }
-        alertController.addAction(sure)
-        self.present(alertController, animated: true, completion: nil)
-    }
 }

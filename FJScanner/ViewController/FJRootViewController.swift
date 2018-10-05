@@ -26,4 +26,26 @@ class FJRootViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //去设置权限
+    func gotoSetting(){
+        
+        let alertController:UIAlertController = UIAlertController.init(title: "设置应用权限",
+                                                                       message: "设置 -> 通用 ->",
+                                                                       preferredStyle: UIAlertControllerStyle.alert)
+        
+        let sure:UIAlertAction = UIAlertAction.init(title: "去开启权限", style: UIAlertActionStyle.default) { (ac) in
+            
+            let url=URL.init(string: UIApplicationOpenSettingsURLString)
+            
+            if UIApplication.shared.canOpenURL(url!){
+                
+                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
+                    
+                })
+            }
+        }
+        alertController.addAction(sure)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
