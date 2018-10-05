@@ -117,6 +117,41 @@ class FJMessageDetailViewController: FJRootViewController {
             self.view.makeToast("复制成功")
         }
         menuArray.append(menuItem3)
+        
+        let menuItem4 = FJBottomMenuItem()
+        menuItem4.imageName = "rename"
+        menuItem4.action = {
+            var inputText:UITextField = UITextField();
+            let msgAlertCtr = UIAlertController.init(title: "提示", message: "请输入名称", preferredStyle: .alert)
+            let ok = UIAlertAction.init(title: "确定", style:.default) { (action:UIAlertAction) ->() in
+                if((inputText.text) != ""){
+                    let realm = try! Realm()
+                    let message = self.qrMsg
+                    try! realm.write() {
+                        message.name = inputText.text!
+                    }
+                    self.view.makeToast("名称修改成功")
+                }
+                else {
+                    self.view.makeToast("内容不能为空")
+                }
+            }
+            
+            let cancel = UIAlertAction.init(title: "取消", style:.cancel) { (action:UIAlertAction) -> ()in
+                
+            }
+            msgAlertCtr.addAction(ok)
+            msgAlertCtr.addAction(cancel)
+            //添加textField输入框
+            msgAlertCtr.addTextField { (textField) in
+                //设置传入的textField为初始化UITextField
+                inputText = textField
+            }
+            //设置到当前视图
+            self.present(msgAlertCtr, animated: true, completion: nil)
+
+        }
+        menuArray.append(menuItem4)
 
         let menuItem5 = FJBottomMenuItem()
         menuItem5.imageName = "delete"
