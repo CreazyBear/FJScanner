@@ -32,8 +32,8 @@
 		A5B1AEC4213D8C120009540D /* FJRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC3213D8C120009540D /* FJRootViewController.swift */; };
 		A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */; };
 		A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */; };
-		A5E636DF2167653500B3B739 /* FJContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E636DE2167653500B3B739 /* FJContactDetailViewController.swift */; };
 		A5E636E121676D0900B3B739 /* FJBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E636E021676D0900B3B739 /* FJBottomMenuView.swift */; };
+		A5E636E821679AB600B3B739 /* FJContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E636E621679AB600B3B739 /* FJContactDetailViewController.swift */; };
 		DE8D06FF2994AB4C58923C60 /* Pods_FJScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */; };
 		F287C67B46155E5DBACE13BB /* Pods_FJScannerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3507C265C3FE5281726E40D /* Pods_FJScannerTests.framework */; };
 		F989BF630CE53F0AB3208170 /* Pods_FJScannerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A825A6A805CF1FFD5DF8DB66 /* Pods_FJScannerUITests.framework */; };
@@ -129,8 +129,8 @@
 		A5B1AEC3213D8C120009540D /* FJRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJRootViewController.swift; sourceTree = "<group>"; };
 		A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJScannerViewController.swift; sourceTree = "<group>"; };
 		A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJCollectorViewController.swift; sourceTree = "<group>"; };
-		A5E636DE2167653500B3B739 /* FJContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJContactDetailViewController.swift; sourceTree = "<group>"; };
 		A5E636E021676D0900B3B739 /* FJBottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJBottomMenuView.swift; sourceTree = "<group>"; };
+		A5E636E621679AB600B3B739 /* FJContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJContactDetailViewController.swift; sourceTree = "<group>"; };
 		A825A6A805CF1FFD5DF8DB66 /* Pods_FJScannerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScannerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3507C265C3FE5281726E40D /* Pods_FJScannerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScannerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,7 +200,7 @@
 				A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */,
 				A535F75B2158F00C009D9FDE /* FJMessageDetailViewController.swift */,
 				A533C0B6215E8892002ED0FB /* FJImageGeneratorViewController.swift */,
-				A5E636DE2167653500B3B739 /* FJContactDetailViewController.swift */,
+				A5E636E621679AB600B3B739 /* FJContactDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -674,8 +674,8 @@
 				A535F75C2158F00C009D9FDE /* FJMessageDetailViewController.swift in Sources */,
 				A5B1AE94213D8A5F0009540D /* AppDelegate.swift in Sources */,
 				A5442759215D297F002AC3DE /* StringExtension.swift in Sources */,
+				A5E636E821679AB600B3B739 /* FJContactDetailViewController.swift in Sources */,
 				A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */,
-				A5E636DF2167653500B3B739 /* FJContactDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

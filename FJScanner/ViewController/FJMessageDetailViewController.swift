@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Photos
+import RealmSwift
 
 
 class FJMessageDetailViewController: FJRootViewController {
@@ -66,7 +67,9 @@ class FJMessageDetailViewController: FJRootViewController {
         let menuItem1 = FJBottomMenuItem()
         menuItem1.imageName = "contact"
         menuItem1.action = {
-            //TODO: 添加到联系人
+            let vc = FJContactDetailViewController.init(qrMessage: self.qrMsg)
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         menuArray.append(menuItem1)
         
@@ -118,7 +121,14 @@ class FJMessageDetailViewController: FJRootViewController {
         let menuItem5 = FJBottomMenuItem()
         menuItem5.imageName = "delete"
         menuItem5.action = {
-            print("删除")
+            do {
+                try Realm().write {
+                    try Realm().delete(self.qrMsg)
+                    self.view.makeToast("已从收藏中移除")
+                }
+            } catch {
+                self.view.makeToast("删除失败")
+            }
         }
         menuArray.append(menuItem5)
 
