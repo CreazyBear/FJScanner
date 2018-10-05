@@ -23,7 +23,7 @@ class FJContactDetailViewController: FJRootViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor.init(red: 0.937, green: 0.9373, blue: 0.9569, alpha: 1)
         // Do any additional setup after loading the view.
     }
 
