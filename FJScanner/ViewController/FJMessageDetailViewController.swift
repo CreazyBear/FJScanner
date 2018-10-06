@@ -63,15 +63,23 @@ class FJMessageDetailViewController: FJRootViewController {
     
     func configBottonMenu() {
         var menuArray:[FJBottomMenuItem] = []
+
         
-        let menuItem1 = FJBottomMenuItem()
-        menuItem1.imageName = "contact"
-        menuItem1.action = {
-            let vc = FJContactDetailViewController.init(qrMessage: self.qrMsg)
-            vc.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vc, animated: true)
+        var isVCard = false
+        if self.qrMsg.message.contains("BEGIN:VCARD") &&
+            self.qrMsg.message.contains("END:VCARD") {
+            isVCard = true
         }
-        menuArray.append(menuItem1)
+        if isVCard {
+            let menuItem1 = FJBottomMenuItem()
+            menuItem1.imageName = "contact"
+            menuItem1.action = {
+                let vc = FJContactDetailViewController.init(qrMessage: self.qrMsg)
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            menuArray.append(menuItem1)
+        }
         
         let menuItem2 = FJBottomMenuItem()
         menuItem2.imageName = "qrcode"
