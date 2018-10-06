@@ -346,8 +346,6 @@ extension FJScannerViewController {
             msgCache = String.init(format: "https://%@", msgCache)
         }
         guard let url = URL.init(string: msgCache) else {
-            self.view.makeToast("打不开链接")
-            self.scanSwitch = true
             return nil
         }
         

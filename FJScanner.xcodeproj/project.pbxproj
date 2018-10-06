@@ -7,15 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A50ACDA821672F3800BFFF63 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50ACDA721672F3800BFFF63 /* NotificationCenter.framework */; };
-		A50ACDAB21672F3800BFFF63 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50ACDAA21672F3800BFFF63 /* TodayViewController.swift */; };
-		A50ACDAE21672F3800BFFF63 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50ACDAC21672F3800BFFF63 /* MainInterface.storyboard */; };
-		A50ACDB221672F3800BFFF63 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A50ACDA621672F3800BFFF63 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		A50ACDBD21672F5D00BFFF63 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50ACDBC21672F5D00BFFF63 /* Messages.framework */; };
-		A50ACDC021672F5D00BFFF63 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50ACDBF21672F5D00BFFF63 /* MessagesViewController.swift */; };
-		A50ACDC321672F5D00BFFF63 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A50ACDC121672F5D00BFFF63 /* MainInterface.storyboard */; };
-		A50ACDC521672F5F00BFFF63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50ACDC421672F5F00BFFF63 /* Assets.xcassets */; };
-		A50ACDC921672F5F00BFFF63 /* MessageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A50ACDBB21672F5D00BFFF63 /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A5127CE7216844D2009069A3 /* FJContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5127CE5216844D2009069A3 /* FJContactDetailViewController.swift */; };
 		A5127CE8216844D2009069A3 /* FJContactDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5127CE6216844D2009069A3 /* FJContactDetailViewController.xib */; };
 		A533C0B7215E8892002ED0FB /* FJImageGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533C0B6215E8892002ED0FB /* FJImageGeneratorViewController.swift */; };
@@ -41,20 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A50ACDB021672F3800BFFF63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5B1AE88213D8A5F0009540D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A50ACDA521672F3800BFFF63;
-			remoteInfo = TodayExtension;
-		};
-		A50ACDC721672F5F00BFFF63 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5B1AE88213D8A5F0009540D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A50ACDBA21672F5D00BFFF63;
-			remoteInfo = MessageExtension;
-		};
 		A5B1AEA5213D8A610009540D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5B1AE88213D8A5F0009540D /* Project object */;
@@ -78,8 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				A50ACDC921672F5F00BFFF63 /* MessageExtension.appex in Embed App Extensions */,
-				A50ACDB221672F3800BFFF63 /* TodayExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,19 +68,8 @@
 		68132069F1F7C1E0A0967105 /* Pods-FJScannerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScannerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScannerUITests/Pods-FJScannerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.debug.xcconfig"; sourceTree = "<group>"; };
 		8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FJScanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-FJScanner/Pods-FJScanner.release.xcconfig"; sourceTree = "<group>"; };
-		A50ACDA621672F3800BFFF63 /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50ACDA721672F3800BFFF63 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		A50ACDAA21672F3800BFFF63 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		A50ACDAD21672F3800BFFF63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		A50ACDAF21672F3800BFFF63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A50ACDBB21672F5D00BFFF63 /* MessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50ACDBC21672F5D00BFFF63 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
-		A50ACDBF21672F5D00BFFF63 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		A50ACDC221672F5D00BFFF63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		A50ACDC421672F5F00BFFF63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A50ACDC621672F5F00BFFF63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A50ACDCD2167303000BFFF63 /* MessageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageExtension.entitlements; sourceTree = "<group>"; };
-		A50ACDCE2167309800BFFF63 /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
 		A50ACDCF216730A500BFFF63 /* FJScanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FJScanner.entitlements; sourceTree = "<group>"; };
 		A5127CE5216844D2009069A3 /* FJContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJContactDetailViewController.swift; sourceTree = "<group>"; };
 		A5127CE6216844D2009069A3 /* FJContactDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FJContactDetailViewController.xib; sourceTree = "<group>"; };
@@ -139,22 +103,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A50ACDA321672F3800BFFF63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A50ACDA821672F3800BFFF63 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A50ACDB821672F5D00BFFF63 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A50ACDBD21672F5D00BFFF63 /* Messages.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A5B1AE8D213D8A5F0009540D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,29 +164,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A50ACDA921672F3800BFFF63 /* TodayExtension */ = {
-			isa = PBXGroup;
-			children = (
-				A50ACDCE2167309800BFFF63 /* TodayExtension.entitlements */,
-				A50ACDAA21672F3800BFFF63 /* TodayViewController.swift */,
-				A50ACDAC21672F3800BFFF63 /* MainInterface.storyboard */,
-				A50ACDAF21672F3800BFFF63 /* Info.plist */,
-			);
-			path = TodayExtension;
-			sourceTree = "<group>";
-		};
-		A50ACDBE21672F5D00BFFF63 /* MessageExtension */ = {
-			isa = PBXGroup;
-			children = (
-				A50ACDCD2167303000BFFF63 /* MessageExtension.entitlements */,
-				A50ACDBF21672F5D00BFFF63 /* MessagesViewController.swift */,
-				A50ACDC121672F5D00BFFF63 /* MainInterface.storyboard */,
-				A50ACDC421672F5F00BFFF63 /* Assets.xcassets */,
-				A50ACDC621672F5F00BFFF63 /* Info.plist */,
-			);
-			path = MessageExtension;
-			sourceTree = "<group>";
-		};
 		A535F7542158DDE7009D9FDE /* Uitls */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,8 +214,6 @@
 				A5B1AE92213D8A5F0009540D /* FJScanner */,
 				A5B1AEA7213D8A610009540D /* FJScannerTests */,
 				A5B1AEB2213D8A610009540D /* FJScannerUITests */,
-				A50ACDA921672F3800BFFF63 /* TodayExtension */,
-				A50ACDBE21672F5D00BFFF63 /* MessageExtension */,
 				A5B1AE91213D8A5F0009540D /* Products */,
 				B67F5FA08DA5347B0043C9CD /* Pods */,
 				3B4F2892FA6A433EF1B967B7 /* Frameworks */,
@@ -303,8 +226,6 @@
 				A5B1AE90213D8A5F0009540D /* FJScanner.app */,
 				A5B1AEA4213D8A610009540D /* FJScannerTests.xctest */,
 				A5B1AEAF213D8A610009540D /* FJScannerUITests.xctest */,
-				A50ACDA621672F3800BFFF63 /* TodayExtension.appex */,
-				A50ACDBB21672F5D00BFFF63 /* MessageExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,40 +281,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A50ACDA521672F3800BFFF63 /* TodayExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A50ACDB521672F3800BFFF63 /* Build configuration list for PBXNativeTarget "TodayExtension" */;
-			buildPhases = (
-				A50ACDA221672F3800BFFF63 /* Sources */,
-				A50ACDA321672F3800BFFF63 /* Frameworks */,
-				A50ACDA421672F3800BFFF63 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TodayExtension;
-			productName = TodayExtension;
-			productReference = A50ACDA621672F3800BFFF63 /* TodayExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		A50ACDBA21672F5D00BFFF63 /* MessageExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A50ACDCA21672F5F00BFFF63 /* Build configuration list for PBXNativeTarget "MessageExtension" */;
-			buildPhases = (
-				A50ACDB721672F5D00BFFF63 /* Sources */,
-				A50ACDB821672F5D00BFFF63 /* Frameworks */,
-				A50ACDB921672F5D00BFFF63 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MessageExtension;
-			productName = MessageExtension;
-			productReference = A50ACDBB21672F5D00BFFF63 /* MessageExtension.appex */;
-			productType = "com.apple.product-type.app-extension.messages";
-		};
 		A5B1AE8F213D8A5F0009540D /* FJScanner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5B1AEB8213D8A610009540D /* Build configuration list for PBXNativeTarget "FJScanner" */;
@@ -408,8 +295,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A50ACDB121672F3800BFFF63 /* PBXTargetDependency */,
-				A50ACDC821672F5F00BFFF63 /* PBXTargetDependency */,
 			);
 			name = FJScanner;
 			productName = FJScanner;
@@ -464,27 +349,11 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "熊伟";
 				TargetAttributes = {
-					A50ACDA521672F3800BFFF63 = {
-						CreatedOnToolsVersion = 10.0;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
-					A50ACDBA21672F5D00BFFF63 = {
-						CreatedOnToolsVersion = 10.0;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
 					A5B1AE8F213D8A5F0009540D = {
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -514,30 +383,11 @@
 				A5B1AE8F213D8A5F0009540D /* FJScanner */,
 				A5B1AEA3213D8A610009540D /* FJScannerTests */,
 				A5B1AEAE213D8A610009540D /* FJScannerUITests */,
-				A50ACDA521672F3800BFFF63 /* TodayExtension */,
-				A50ACDBA21672F5D00BFFF63 /* MessageExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A50ACDA421672F3800BFFF63 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A50ACDAE21672F3800BFFF63 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A50ACDB921672F5D00BFFF63 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A50ACDC521672F5F00BFFF63 /* Assets.xcassets in Resources */,
-				A50ACDC321672F5D00BFFF63 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A5B1AE8E213D8A5F0009540D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -646,22 +496,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50ACDA221672F3800BFFF63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A50ACDAB21672F3800BFFF63 /* TodayViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A50ACDB721672F5D00BFFF63 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A50ACDC021672F5D00BFFF63 /* MessagesViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A5B1AE8C213D8A5F0009540D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -702,16 +536,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A50ACDB121672F3800BFFF63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A50ACDA521672F3800BFFF63 /* TodayExtension */;
-			targetProxy = A50ACDB021672F3800BFFF63 /* PBXContainerItemProxy */;
-		};
-		A50ACDC821672F5F00BFFF63 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A50ACDBA21672F5D00BFFF63 /* MessageExtension */;
-			targetProxy = A50ACDC721672F5F00BFFF63 /* PBXContainerItemProxy */;
-		};
 		A5B1AEA6213D8A610009540D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5B1AE8F213D8A5F0009540D /* FJScanner */;
@@ -725,22 +549,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A50ACDAC21672F3800BFFF63 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A50ACDAD21672F3800BFFF63 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-		A50ACDC121672F5D00BFFF63 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A50ACDC221672F5D00BFFF63 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		A5B1AE9C213D8A610009540D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -752,98 +560,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A50ACDB321672F3800BFFF63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2FWNJCD9X7;
-				INFOPLIST_FILE = TodayExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScanner.TodayExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A50ACDB421672F3800BFFF63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2FWNJCD9X7;
-				INFOPLIST_FILE = TodayExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScanner.TodayExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		A50ACDCB21672F5F00BFFF63 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CODE_SIGN_ENTITLEMENTS = MessageExtension/MessageExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2FWNJCD9X7;
-				INFOPLIST_FILE = MessageExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScanner.MessageExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A50ACDCC21672F5F00BFFF63 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CODE_SIGN_ENTITLEMENTS = MessageExtension/MessageExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2FWNJCD9X7;
-				INFOPLIST_FILE = MessageExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bear.FJScanner.MessageExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		A5B1AEB6213D8A610009540D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -962,9 +678,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D059EEE0C6F58CB782B3267 /* Pods-FJScanner.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = FJScanner/FJScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScanner/Info.plist;
@@ -984,9 +698,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C5EE5EFC86F4B76629D2639 /* Pods-FJScanner.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = FJScanner/FJScanner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2FWNJCD9X7;
 				INFOPLIST_FILE = FJScanner/Info.plist;
@@ -1091,24 +803,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A50ACDB521672F3800BFFF63 /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A50ACDB321672F3800BFFF63 /* Debug */,
-				A50ACDB421672F3800BFFF63 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A50ACDCA21672F5F00BFFF63 /* Build configuration list for PBXNativeTarget "MessageExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A50ACDCB21672F5F00BFFF63 /* Debug */,
-				A50ACDCC21672F5F00BFFF63 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A5B1AE8B213D8A5F0009540D /* Build configuration list for PBXProject "FJScanner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

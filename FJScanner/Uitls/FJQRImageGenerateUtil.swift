@@ -126,4 +126,11 @@ class FJQRImageGenerateUtil: NSObject {
         },completionHandler: completionHandler)
     }
 
+    static func saveQRImageToPhoto(image:UIImage, completionHandler: ((Bool, Error?) -> Void)? = nil) {
+        
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        },completionHandler: completionHandler)
+    }
+
 }

@@ -184,7 +184,7 @@ class FJImageGeneratorViewController: FJRootViewController {
         }
         else if sender.tag == 4 {//保存
             
-            FJQRImageGenerateUtil.saveQRImageToPhoto(message: self.text) { (success, error) in
+            FJQRImageGenerateUtil.saveQRImageToPhoto(image:imageBoard.image!) { (success, error) in
                 DispatchQueue.main.async {
                     if success {
                         self.view.makeToast("二维码图片已成功保存到相册")
