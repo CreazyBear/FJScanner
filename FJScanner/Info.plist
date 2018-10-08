@@ -25,7 +25,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>应用需要您的同意才使用相机</string>
 	<key>NSContactsUsageDescription</key>
-	<string>应用需要您的同意才使用通讯录</string>
+	<string>应用需要您的同意才使用写入通讯录</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>应用需要您的同意才能读取媒体资料库</string>
 	<key>UILaunchStoryboardName</key>

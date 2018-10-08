@@ -183,7 +183,10 @@ class FJImageGeneratorViewController: FJRootViewController {
             self.selectImage = UIImage.init()
         }
         else if sender.tag == 4 {//保存
-            
+            guard imageBoard.image != nil else {
+                self.view.makeToast("还没有添加内容呢~")
+                return
+            }
             FJQRImageGenerateUtil.saveQRImageToPhoto(image:imageBoard.image!) { (success, error) in
                 DispatchQueue.main.async {
                     if success {
