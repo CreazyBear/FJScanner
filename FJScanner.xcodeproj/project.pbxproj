@@ -24,6 +24,8 @@
 		A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */; };
 		A5B1AEC8213D8EE10009540D /* FJCollectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */; };
 		A5E636E121676D0900B3B739 /* FJBottomMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E636E021676D0900B3B739 /* FJBottomMenuView.swift */; };
+		A5F6486B217A31DC001ABB4B /* FJTextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F64869217A31DC001ABB4B /* FJTextInputViewController.swift */; };
+		A5F6486C217A31DC001ABB4B /* FJTextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F6486A217A31DC001ABB4B /* FJTextInputViewController.xib */; };
 		DE8D06FF2994AB4C58923C60 /* Pods_FJScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		A5B1AEC5213D8EC70009540D /* FJScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJScannerViewController.swift; sourceTree = "<group>"; };
 		A5B1AEC7213D8EE10009540D /* FJCollectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJCollectorViewController.swift; sourceTree = "<group>"; };
 		A5E636E021676D0900B3B739 /* FJBottomMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJBottomMenuView.swift; sourceTree = "<group>"; };
+		A5F64869217A31DC001ABB4B /* FJTextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FJTextInputViewController.swift; sourceTree = "<group>"; };
+		A5F6486A217A31DC001ABB4B /* FJTextInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FJTextInputViewController.xib; sourceTree = "<group>"; };
 		D1586C618C2CB83D0D2A0380 /* Pods_FJScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FJScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -101,6 +105,8 @@
 				A533C0B6215E8892002ED0FB /* FJImageGeneratorViewController.swift */,
 				A5127CE5216844D2009069A3 /* FJContactDetailViewController.swift */,
 				A5127CE6216844D2009069A3 /* FJContactDetailViewController.xib */,
+				A5F64869217A31DC001ABB4B /* FJTextInputViewController.swift */,
+				A5F6486A217A31DC001ABB4B /* FJTextInputViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -269,6 +275,7 @@
 			files = (
 				A5B1AE9E213D8A610009540D /* LaunchScreen.storyboard in Resources */,
 				A5B1AE9B213D8A610009540D /* Assets.xcassets in Resources */,
+				A5F6486C217A31DC001ABB4B /* FJTextInputViewController.xib in Resources */,
 				A5127CE8216844D2009069A3 /* FJContactDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +346,7 @@
 				A5442759215D297F002AC3DE /* StringExtension.swift in Sources */,
 				A5127CE7216844D2009069A3 /* FJContactDetailViewController.swift in Sources */,
 				A5B1AEC6213D8EC70009540D /* FJScannerViewController.swift in Sources */,
+				A5F6486B217A31DC001ABB4B /* FJTextInputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

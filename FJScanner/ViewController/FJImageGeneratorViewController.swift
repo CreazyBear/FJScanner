@@ -150,32 +150,46 @@ class FJImageGeneratorViewController: FJRootViewController {
             }
         }
         else if sender.tag == 2 {//text
-            //初始化UITextField
-            var inputText:UITextField = UITextField();
-            let msgAlertCtr = UIAlertController.init(title: "提示", message: "请输入内容，以生成二维码", preferredStyle: .alert)
-            let ok = UIAlertAction.init(title: "确定", style:.default) { (action:UIAlertAction) ->() in
-                if((inputText.text) != ""){
-                    self.handleUserInputText(text: inputText.text!)
+            
+            let textInputVC = FJTextInputViewController()
+            textInputVC.resultBlock = {
+                (content: String) -> Void in
+                if(content != ""){
+                    self.handleUserInputText(text: content)
                 }
                 else {
                     self.view.makeToast("内容不能为空")
                 }
             }
+            self.navigationController?.pushViewController(textInputVC, animated: true)
             
-            let cancel = UIAlertAction.init(title: "取消", style:.cancel) { (action:UIAlertAction) -> ()in
-                
-            }
-            
-            msgAlertCtr.addAction(ok)
-            msgAlertCtr.addAction(cancel)
-            //添加textField输入框
-            msgAlertCtr.addTextField { (textField) in
-                //设置传入的textField为初始化UITextField
-                inputText = textField
-                inputText.placeholder = "输入数据"
-            }
-            //设置到当前视图
-            self.present(msgAlertCtr, animated: true, completion: nil)
+//
+//            //初始化UITextField
+//            var inputText:UITextField = UITextField();
+//            let msgAlertCtr = UIAlertController.init(title: "提示", message: "请输入内容，以生成二维码", preferredStyle: .alert)
+//            let ok = UIAlertAction.init(title: "确定", style:.default) { (action:UIAlertAction) ->() in
+//                if((inputText.text) != ""){
+//                    self.handleUserInputText(text: inputText.text!)
+//                }
+//                else {
+//                    self.view.makeToast("内容不能为空")
+//                }
+//            }
+//
+//            let cancel = UIAlertAction.init(title: "取消", style:.cancel) { (action:UIAlertAction) -> ()in
+//
+//            }
+//
+//            msgAlertCtr.addAction(ok)
+//            msgAlertCtr.addAction(cancel)
+//            //添加textField输入框
+//            msgAlertCtr.addTextField { (textField) in
+//                //设置传入的textField为初始化UITextField
+//                inputText = textField
+//                inputText.placeholder = "输入数据"
+//            }
+//            //设置到当前视图
+//            self.present(msgAlertCtr, animated: true, completion: nil)
         }
         else if sender.tag == 3 {//delete
             self.text = ""
@@ -282,7 +296,7 @@ class FJImageGeneratorViewController: FJRootViewController {
             self.imageBoard.image = qrImage
         }
         else {
-            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 150, height: 150)
+            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
         }
         
     }
@@ -291,7 +305,7 @@ class FJImageGeneratorViewController: FJRootViewController {
         self.selectImage = selectImage
         if self.text.count > 0 {
             let qrImage = FJQRImageGenerateUtil.setupQRCodeImage(self.text, image: nil)
-            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 150, height: 150)
+            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
         }
         else {
             self.imageBoard.image = selectImage
