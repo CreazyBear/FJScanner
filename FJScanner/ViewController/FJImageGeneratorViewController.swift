@@ -23,6 +23,8 @@ class FJImageGeneratorViewController: FJRootViewController {
     
     let imageBoard = UIImageView.init()
     var selectImage = UIImage.init()
+    var qrImageView = UIImageView.init()
+    var maskView = UIView()
     
     var text:String = ""
         
@@ -30,7 +32,8 @@ class FJImageGeneratorViewController: FJRootViewController {
         super.viewDidLoad()
         
         self.addSubViews()
-        self.configImageBoard()
+        self.configImageBoard(false)
+        self.configImageBoardGesture()
         self.configButtons()
     }
     
@@ -41,19 +44,73 @@ class FJImageGeneratorViewController: FJRootViewController {
         self.view.addSubview(self.addLogoButton)
         self.view.addSubview(self.addSaveButton)
         self.view.addSubview(self.menu)
-        
     }
     
-    func configImageBoard() {
+    func bringMenuToFront() {
+        self.view.bringSubview(toFront: self.addTextButton)
+        self.view.bringSubview(toFront: self.addImageButton)
+        self.view.bringSubview(toFront: self.addLogoButton)
+        self.view.bringSubview(toFront: self.addSaveButton)
+        self.view.bringSubview(toFront: self.menu)
+    }
+    
+    func configImageBoard(_ isUpdate:Bool) {
         
         self.imageBoard.contentMode = .scaleAspectFit
+        self.imageBoard.isUserInteractionEnabled = true
         
-        self.imageBoard.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview().offset(kFJNavigationBarHeight)
-            make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
-            make.right.equalToSuperview()
+        if isUpdate {
+            self.imageBoard.snp.updateConstraints { (make) in
+                make.left.equalToSuperview().offset(0)
+                make.right.equalToSuperview().offset(0)
+                make.top.equalToSuperview().offset(kFJNavigationBarHeight)
+                make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
+            }
         }
+        else {
+            self.imageBoard.snp.makeConstraints { (make) in
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.top.equalToSuperview().offset(kFJNavigationBarHeight)
+                make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
+            }
+        }
+    }
+    
+    func configImageBoardGesture() {
+        // 监听移动手势
+        self.imageBoard.isUserInteractionEnabled = true
+        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handleQrImagePangeGesture(gesture:)))
+        self.imageBoard.addGestureRecognizer(panGesture)
+        
+        // 监听旋转手势
+        let rotationGestureRecgonizer = UIRotationGestureRecognizer.init(target: self, action: #selector(handleRotationGesture(_:)))
+        rotationGestureRecgonizer.delegate = self
+        self.imageBoard.addGestureRecognizer(rotationGestureRecgonizer)
+        
+        // 监听缩放手势
+        let pinchGestureRecgonizer = UIPinchGestureRecognizer.init(target: self, action: #selector(handlePinchGesture(_:)))
+        pinchGestureRecgonizer.delegate = self
+        self.imageBoard.addGestureRecognizer(pinchGestureRecgonizer)
+        
+    }
+
+    func configQRImageViewgGesture() {
+        // 监听移动手势
+        self.qrImageView.isUserInteractionEnabled = true
+        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handleQrImagePangeGesture(gesture:)))
+        self.qrImageView.addGestureRecognizer(panGesture)
+        
+        // 监听旋转手势
+        let rotationGestureRecgonizer = UIRotationGestureRecognizer.init(target: self, action: #selector(handleRotationGesture(_:)))
+        rotationGestureRecgonizer.delegate = self
+        self.qrImageView.addGestureRecognizer(rotationGestureRecgonizer)
+        
+        // 监听缩放手势
+        let pinchGestureRecgonizer = UIPinchGestureRecognizer.init(target: self, action: #selector(handlePinchGesture(_:)))
+        pinchGestureRecgonizer.delegate = self
+        self.qrImageView.addGestureRecognizer(pinchGestureRecgonizer)
+        
     }
     
     func configButtons() {
@@ -162,38 +219,14 @@ class FJImageGeneratorViewController: FJRootViewController {
                 }
             }
             self.navigationController?.pushViewController(textInputVC, animated: true)
-            
-//
-//            //初始化UITextField
-//            var inputText:UITextField = UITextField();
-//            let msgAlertCtr = UIAlertController.init(title: "提示", message: "请输入内容，以生成二维码", preferredStyle: .alert)
-//            let ok = UIAlertAction.init(title: "确定", style:.default) { (action:UIAlertAction) ->() in
-//                if((inputText.text) != ""){
-//                    self.handleUserInputText(text: inputText.text!)
-//                }
-//                else {
-//                    self.view.makeToast("内容不能为空")
-//                }
-//            }
-//
-//            let cancel = UIAlertAction.init(title: "取消", style:.cancel) { (action:UIAlertAction) -> ()in
-//
-//            }
-//
-//            msgAlertCtr.addAction(ok)
-//            msgAlertCtr.addAction(cancel)
-//            //添加textField输入框
-//            msgAlertCtr.addTextField { (textField) in
-//                //设置传入的textField为初始化UITextField
-//                inputText = textField
-//                inputText.placeholder = "输入数据"
-//            }
-//            //设置到当前视图
-//            self.present(msgAlertCtr, animated: true, completion: nil)
         }
         else if sender.tag == 3 {//delete
             self.text = ""
             self.imageBoard.image = nil
+            self.removeBorderOfImageBoard()
+            self.maskView.removeFromSuperview()
+            self.qrImageView.image = nil;
+            self.qrImageView.removeFromSuperview()
             self.selectImage = UIImage.init()
         }
         else if sender.tag == 4 {//保存
@@ -201,6 +234,14 @@ class FJImageGeneratorViewController: FJRootViewController {
                 self.view.makeToast("还没有添加内容呢~")
                 return
             }
+            if self.selectImage.size != CGRect.zero.size {
+                //TODO: the user had selected an image as background image, combine two image
+            }
+            else {
+                //TODO: Just output the qrimage
+            }
+            
+            
             FJQRImageGenerateUtil.saveQRImageToPhoto(image:imageBoard.image!) { (success, error) in
                 DispatchQueue.main.async {
                     if success {
@@ -293,28 +334,172 @@ class FJImageGeneratorViewController: FJRootViewController {
         let qrImage = FJQRImageGenerateUtil.setupQRCodeImage(text, image: nil)
         
         if self.selectImage.size == CGSize.zero {
+            self.qrImageView.removeFromSuperview()
             self.imageBoard.image = qrImage
         }
         else {
-            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
+            let widthOfQRCode = self.imageBoard.frame.size.width>self.imageBoard.frame.size.height ? self.imageBoard.frame.size.height/2 : self.imageBoard.frame.size.width/2
+            qrImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: widthOfQRCode, height: widthOfQRCode))
+            qrImageView.image = qrImage
+            self.imageBoard.addSubview(qrImageView)
+            self.configQRImageViewgGesture()
+//            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
+            
         }
         
     }
     
     func handleUserSelectImage(selectImage:UIImage) {
+        self.configImageBoard(true)
+        self.maskView.removeFromSuperview()
+        self.removeBorderOfImageBoard()
         self.selectImage = selectImage
+        var imageBoardFrame = CGRect.zero
         if self.text.count > 0 {
+            self.qrImageView.removeFromSuperview()
+            self.imageBoard.image = selectImage
+            
+            //config frame for imageboard
+            var scale:CGFloat = 1.0
+            if selectImage.size.width >= selectImage.size.height {
+                scale = self.imageBoard.frame.size.width/selectImage.size.width
+                let frame = CGRect.init(x: 0, y: kFJNavigationBarHeight, width: kFJWindowWidth, height: kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)
+                let topOffset = (frame.size.height - selectImage.size.height*scale)/2
+                let bottomOffset = frame.size.height - selectImage.size.height*scale - topOffset
+                imageBoardFrame = CGRect.init(x: 0, y: topOffset - kFJNavigationBarHeight, width: kFJWindowWidth, height: selectImage.size.height*scale)
+                self.imageBoard.snp.remakeConstraints { (make) in
+                    make.left.equalToSuperview().offset(0)
+                    make.right.equalToSuperview().offset(0)
+                    make.top.equalToSuperview().offset(topOffset)
+                    make.bottom.equalToSuperview().offset(-bottomOffset)
+                }
+            }
+            else {
+                scale = (kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)/selectImage.size.height
+                let rightOffset = (kFJWindowWidth - selectImage.size.width*scale)/2
+                let leftOffset = rightOffset
+                imageBoardFrame = CGRect.init(x: rightOffset, y: 0, width: kFJWindowWidth - 2*rightOffset, height: kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)
+                self.imageBoard.snp.remakeConstraints { (make) in
+                    make.left.equalToSuperview().offset(leftOffset)
+                    make.right.equalToSuperview().offset(-rightOffset)
+                    make.top.equalToSuperview().offset(kFJNavigationBarHeight)
+                    make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
+                }
+            }
+            
             let qrImage = FJQRImageGenerateUtil.setupQRCodeImage(self.text, image: nil)
-            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
+            qrImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: self.imageBoard.frame.size.width/2, height: self.imageBoard.frame.size.height/2))
+            qrImageView.image = qrImage
+            self.imageBoard.addSubview(qrImageView)
+            self.configQRImageViewgGesture()
+            self.addBorderToImageBoard()
+            self.addMaskView(imageBoardFrame)
+//            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
         }
         else {
             self.imageBoard.image = selectImage
+
+            //config frame for imageboard
+            if selectImage.size.width >= selectImage.size.height {
+                var scale:CGFloat = 1.0
+                scale = kFJWindowWidth/selectImage.size.width
+                let frame = CGRect.init(x: 0, y: kFJNavigationBarHeight, width: kFJWindowWidth, height: kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)
+                let topOffset = (frame.size.height - selectImage.size.height*scale)/2 + kFJNavigationBarHeight
+                let bottomOffset = kFJWindowHeight - topOffset - selectImage.size.height*scale
+                imageBoardFrame = CGRect.init(x: 0, y: topOffset - kFJNavigationBarHeight, width: kFJWindowWidth, height: selectImage.size.height*scale)
+                self.imageBoard.snp.remakeConstraints { (make) in
+                    make.left.equalToSuperview().offset(0)
+                    make.right.equalToSuperview().offset(0)
+                    make.top.equalToSuperview().offset(topOffset)
+                    make.bottom.equalToSuperview().offset(-bottomOffset)
+                }
+            }
+            else {
+                var scale:CGFloat = 1.0
+                scale = (kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)/selectImage.size.height
+                let rightOffset = (kFJWindowWidth - selectImage.size.width*scale)/2
+                let leftOffset = rightOffset
+                imageBoardFrame = CGRect.init(x: rightOffset, y: 0, width: kFJWindowWidth - 2*rightOffset, height: kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)
+                self.imageBoard.snp.remakeConstraints { (make) in
+                    make.left.equalToSuperview().offset(leftOffset)
+                    make.right.equalToSuperview().offset(-rightOffset)
+                    make.top.equalToSuperview().offset(kFJNavigationBarHeight)
+                    make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
+                }
+            }
+            self.addBorderToImageBoard()
+            self.addMaskView(imageBoardFrame)
+
         }
     }
     
     func callFeddBack() {
         let feedBackGenertor = UIImpactFeedbackGenerator.init(style: UIImpactFeedbackStyle.medium)
         feedBackGenertor.impactOccurred()
+    }
+    
+    @objc func handleQrImagePangeGesture(gesture:UIPanGestureRecognizer) {
+        let targetView = self.qrImageView
+        guard targetView.image?.size != CGRect.zero.size else {
+            return
+        }
+        if imageBoard.image == nil {
+            return
+        }
+        let transP = gesture.translation(in: targetView)
+        targetView.transform = targetView.transform.translatedBy(x: transP.x, y: transP.y)
+        gesture.setTranslation(CGPoint.zero, in: targetView)
+    }
+    
+    @objc func handleRotationGesture(_ gesture:UIRotationGestureRecognizer) {
+        let targetView = self.qrImageView
+        guard targetView.image?.size != CGRect.zero.size else {
+            return
+        }
+        if imageBoard.image == nil {
+            return
+        }
+        targetView.transform = targetView.transform.rotated(by: gesture.rotation)
+        gesture.rotation = 0
+    }
+    
+    @objc func handlePinchGesture(_ gesture:UIPinchGestureRecognizer) {
+        let targetView = self.qrImageView
+        guard targetView.image?.size != CGRect.zero.size else {
+            return
+        }
+        if imageBoard.image == nil {
+            return
+        }
+        targetView.transform = targetView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+        gesture.scale = 1.0
+        
+    }
+
+    func addBorderToImageBoard() {
+        self.imageBoard.layer.borderWidth = 2
+        self.imageBoard.layer.borderColor = UIColor.orange.cgColor
+        self.imageBoard.layer.cornerRadius = 2
+    }
+    
+    func removeBorderOfImageBoard() {
+        self.imageBoard.layer.borderWidth = 0
+        self.imageBoard.layer.cornerRadius = 0
+    }
+    
+    func addMaskView(_ imageBoardFrame:CGRect) {
+        let frame = CGRect.init(x: 0, y: kFJNavigationBarHeight, width: kFJWindowWidth, height: kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)
+        self.maskView = UIView.init(frame: frame)
+        self.maskView.isUserInteractionEnabled = false
+        self.view.addSubview(self.maskView)
+        self.bringMenuToFront()
+        self.maskView.backgroundColor = UIColor.white
+        self.maskView.alpha = 0.9
+        let bezierPath = UIBezierPath.init(rect: maskView.bounds)
+        bezierPath.append(UIBezierPath.init(rect: imageBoardFrame).reversing())
+        let shapeLayer = CAShapeLayer.init()
+        shapeLayer.path = bezierPath.cgPath
+        self.maskView.layer.mask = shapeLayer
     }
 }
 

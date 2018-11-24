@@ -118,6 +118,24 @@ class FJQRImageGenerateUtil: NSObject {
         return UIImage()
     }
     
+    static func combineImage(_ image: UIImage, qrImage:UIImage, frame:CGRect) -> UIImage{
+        //开启图片上下文
+        UIGraphicsBeginImageContext(image.size)
+        //绘制背景图片
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+        qrImage.draw(in: frame)
+        //取出绘制好的图片
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        //关闭上下文
+        UIGraphicsEndImageContext()
+        //返回合成好的图片
+        if let newImage = newImage {
+            return newImage
+        }
+        return UIImage()
+    }
+
+    
     static func saveQRImageToPhoto(message:String, completionHandler: ((Bool, Error?) -> Void)? = nil) {
         
         let image = FJQRImageGenerateUtil.setupQRCodeImage(message, image: nil)
