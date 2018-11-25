@@ -234,15 +234,35 @@ class FJImageGeneratorViewController: FJRootViewController {
                 self.view.makeToast("还没有添加内容呢~")
                 return
             }
+            guard self.qrImageView.image != nil else {
+                self.view.makeToast("还没有添加二维码")
+                return
+            }
+            
+            var finalImage:UIImage
             if self.selectImage.size != CGRect.zero.size {
                 //TODO: the user had selected an image as background image, combine two image
+                var finalFrame = CGRect.zero
+                var finalScale:CGFloat = 1.0
+                if self.selectImage.size.height > self.selectImage.size.width {
+                    finalScale = (kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)/selectImage.size.height
+                }
+                else {
+                    finalScale = kFJWindowWidth/selectImage.size.width
+                }
+                let qrImageFrame = self.qrImageView.frame
+                finalFrame.origin.x = qrImageFrame.origin.x / finalScale
+                finalFrame.origin.y = qrImageFrame.origin.y / finalScale
+                finalFrame.size.height = qrImageFrame.size.height / finalScale
+                finalFrame.size.width = qrImageFrame.size.width / finalScale
+                
+                finalImage = FJQRImageGenerateUtil.combineImage(self.imageBoard.image!, qrImage: self.qrImageView.image!, frame: finalFrame)
             }
             else {
                 //TODO: Just output the qrimage
+                finalImage = imageBoard.image!
             }
-            
-            
-            FJQRImageGenerateUtil.saveQRImageToPhoto(image:imageBoard.image!) { (success, error) in
+            FJQRImageGenerateUtil.saveQRImageToPhoto(image:finalImage) { (success, error) in
                 DispatchQueue.main.async {
                     if success {
                         self.view.makeToast("二维码图片已成功保存到相册")
