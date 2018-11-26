@@ -14,6 +14,7 @@ class FJCollectorViewController: FJRootViewController {
     
     var results:[FJQRMessage] = []
     let tableView : UITableView = UITableView.init()
+    var searchBar : UISearchBar = UISearchBar.init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class FJCollectorViewController: FJRootViewController {
         super.viewWillAppear(animated)
         self.setupDataSource()
         self.setupTableView()
+        self.setupSearchBar()
         
     }
     
@@ -31,6 +33,16 @@ class FJCollectorViewController: FJRootViewController {
     func setupDataSource() {
 
         self.results = try! Realm().objects(FJQRMessage.self).filter("message <> ''").sorted(by: { (ele1, ele2) -> Bool in
+            return ele1.createDate>ele2.createDate
+        })
+        self.tableView.reloadData()
+    }
+    
+    func filterDatasource(_ filter:String) {
+        
+        let predicate = NSPredicate(format: "name like '*\(filter)*'")
+        
+        self.results = try! Realm().objects(FJQRMessage.self).filter("message <> ''").filter(predicate).sorted(by: { (ele1, ele2) -> Bool in
             return ele1.createDate>ele2.createDate
         })
         self.tableView.reloadData()
@@ -49,6 +61,15 @@ class FJCollectorViewController: FJRootViewController {
             make.bottom.equalToSuperview().offset(-kFJTabBarHeight)
         }
     }
+    
+    func setupSearchBar() {
+        self.searchBar = UISearchBar.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        self.tableView.tableHeaderView = searchBar
+        self.searchBar.delegate = self
+        self.searchBar.backgroundColor = UIColor.white
+//        self.searchBar.showsCancelButton = true
+    }
+
 }
 
 
@@ -188,4 +209,42 @@ extension FJCollectorViewController:UITableViewDelegate,UITableViewDataSource {
 
     }
 
+}
+
+extension FJCollectorViewController:UISearchBarDelegate {
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            self.setupDataSource()
+        }
+        else {
+            self.filterDatasource(searchText)
+        }
+    }
+    
+    // 搜索触发事件，点击虚拟键盘上的search按钮时触发此方法
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar.text == nil || searchBar.text == "" {
+            self.setupDataSource()
+        }
+        else {
+            self.filterDatasource(searchBar.text!)
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+    }
+    
+    
+}
+
+
+extension FJCollectorViewController : UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.searchBar.isFirstResponder {
+            self.searchBar.resignFirstResponder()
+        }
+    }
 }
