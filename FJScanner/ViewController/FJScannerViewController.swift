@@ -180,10 +180,6 @@ class FJScannerViewController: FJRootViewController {
                 self.gotoSetting()
                 break
             case .authorized:
-                //已经有权限，开始扫描
-                if !self.scanSwitch {
-                    self.scanSwitch = true
-                }
                 break
             }
         })
@@ -193,7 +189,10 @@ class FJScannerViewController: FJRootViewController {
             let status:AVAuthorizationStatus=AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
             if status==AVAuthorizationStatus.authorized {//获得权限
                 if !self.scanSwitch {
-                    self.scanSwitch = true
+                    DispatchQueue.main.async {
+                        self.setupCaptureDeviceAndSession()
+                        self.scanSwitch = true
+                    }
                 }
             }
             else if status==AVAuthorizationStatus.denied ||

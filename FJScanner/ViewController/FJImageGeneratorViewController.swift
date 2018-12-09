@@ -363,7 +363,6 @@ class FJImageGeneratorViewController: FJRootViewController {
             qrImageView.image = qrImage
             self.imageBoard.addSubview(qrImageView)
             self.configQRImageViewgGesture()
-//            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
             
         }
         
@@ -384,8 +383,8 @@ class FJImageGeneratorViewController: FJRootViewController {
             if selectImage.size.width >= selectImage.size.height {
                 scale = self.imageBoard.frame.size.width/selectImage.size.width
                 let frame = CGRect.init(x: 0, y: kFJNavigationBarHeight, width: kFJWindowWidth, height: kFJWindowHeight - kFJTabBarHeight - kFJNavigationBarHeight)
-                let topOffset = (frame.size.height - selectImage.size.height*scale)/2
-                let bottomOffset = frame.size.height - selectImage.size.height*scale - topOffset
+                let topOffset = (frame.size.height - selectImage.size.height*scale)/2 + kFJNavigationBarHeight
+                let bottomOffset = kFJWindowHeight - selectImage.size.height*scale - topOffset
                 imageBoardFrame = CGRect.init(x: 0, y: topOffset - kFJNavigationBarHeight, width: kFJWindowWidth, height: selectImage.size.height*scale)
                 self.imageBoard.snp.remakeConstraints { (make) in
                     make.left.equalToSuperview().offset(0)
@@ -408,13 +407,12 @@ class FJImageGeneratorViewController: FJRootViewController {
             }
             
             let qrImage = FJQRImageGenerateUtil.setupQRCodeImage(self.text, image: nil)
-            qrImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: self.imageBoard.frame.size.width/2, height: self.imageBoard.frame.size.height/2))
+            qrImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: self.imageBoard.frame.size.width/2, height: self.imageBoard.frame.size.width/2))
             qrImageView.image = qrImage
             self.imageBoard.addSubview(qrImageView)
             self.configQRImageViewgGesture()
             self.addBorderToImageBoard()
             self.addMaskView(imageBoardFrame)
-//            self.imageBoard.image = FJQRImageGenerateUtil.combineImage(selectImage, qrImage: qrImage, width: 200, height: 200)
         }
         else {
             self.imageBoard.image = selectImage

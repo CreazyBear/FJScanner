@@ -51,7 +51,15 @@ class FJBottomMenuView: UIView {
             let height = width > maxButtonHeight ? maxButtonHeight : width
             for (index, ele) in self.buttons.enumerated() {
                 ele.snp.makeConstraints { (make) in
-                    make.width.equalTo(width)
+                    
+                    var lastLineWidth = width
+                    if NSInteger(self.buttons.count/4) * 4 <= index {
+                        lastLineWidth = kFJWindowWidth/CGFloat(self.buttons.count - index)
+                        make.width.equalTo(lastLineWidth)
+                    }
+                    else {
+                        make.width.equalTo(width)
+                    }
                     make.height.equalTo(height)
                     make.leading.equalToSuperview().offset(width * CGFloat.init((index % 4)))
                     make.top.equalToSuperview().offset(height * CGFloat.init(Int.init(index / 4)))
